@@ -46,10 +46,10 @@ flutter run
 
 ## 🛣️ Roadmap – Próximas funcionalidades
 
-✅ Aprendizaje de tablas del 1 al 12
-✅ Quiz cronometrado con 10 preguntas
-✅ Resultados con retroalimentación visual (emojis)
-✅ Soporte multilenguaje (español / inglés)
+* [x] Aprendizaje de tablas del 1 al 12
+* [x] Quiz cronometrado con 10 preguntas
+* [x] Resultados con retroalimentación visual (emojis)
+* [x] Soporte multilenguaje (español / inglés)
 
 🔜 Funcionalidades en desarrollo:
 
