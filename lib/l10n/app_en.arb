@@ -1,0 +1,77 @@
+{
+  "@@locale": "en",
+  "appTitle": "Multiplication Tables",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "selectTableTitle": "Multy",
+  "selectTablePrompt": "Which table do you want to practice today?",
+  "practiceButton": "Practice!",
+  "practiceScreenTitle": "Practicing Table {tableNumber}",
+  "@practiceScreenTitle": {
+    "description": "Title for the practice screen",
+    "placeholders": {
+      "tableNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "multiplicationOperation": "{factor1} x {factor2} = ",
+   "@multiplicationOperation": {
+      "description": "The multiplication calculation shown",
+      "placeholders": {
+          "factor1": { "type": "int" },
+          "factor2": { "type": "int" }
+      }
+   },
+  "answerHint": "?",
+  "gradeButton": "Grade",
+  "tryAgainButton": "Try Again",
+  "summaryDialogTitle": "Summary",
+  "congratulationsDialogTitle": "Congratulations!",
+  "summaryDialogContent": "You got {correctCount} out of 12 correct answers.",
+   "@summaryDialogContent": {
+        "description": "Text showing the score in the summary dialog",
+        "placeholders": {
+            "correctCount": { "type": "int" }
+        }
+   },
+  "dialogOkButton": "OK",
+  "correctAnswerWas": "It was {correctAnswer}",
+   "@correctAnswerWas": {
+        "description": "Error message showing the correct answer",
+        "placeholders": {
+            "correctAnswer": { "type": "int" }
+        }
+   },
+  "practiceScreenTestButton": "Take a Quiz!",
+  "@practiceScreenTestButton": { "description": "Button on practice screen to start the quiz" },
+  "quizScreenTitle": "Quiz: Table {tableNumber}",
+  "@quizScreenTitle": { "placeholders": { "tableNumber": { "type": "int" } } },
+  "quizTimeLabel": "Time",
+  "quizQuestionProgress": "Question {current} / {total}",
+  "@quizQuestionProgress": { "placeholders": { "current": {}, "total": {} } },
+  "quizEndedMessage": "Quiz Finished!",
+  "quizTimeOutTitle": "Time's Up!",
+  "quizCompleteTitle": "Quiz Complete!",
+  "quizScoreMessage": "Your score: {score} out of {total}",
+  "@quizScoreMessage": { "placeholders": { "score": {}, "total": {} } },
+  "quizPercentageMessage": "Percentage: {percentage}%",
+  "@quizPercentageMessage": { "placeholders": { "percentage": {} } },
+  "quizPassedMessage": "You passed!",
+  "quizFailedMessage": "Keep practicing!",
+  "quizRetryButton": "Retry",
+  "quizBackToMenuButton": "Back to Menu",
+  "quizCannotExitMessage": "You cannot exit the quiz while it's in progress!",
+  "quizResultScreenTitle": "Results: Table {tableNumber}",
+  "@quizResultScreenTitle": { "placeholders": { "tableNumber": {} } },
+  "quizPassedMessageLarge": "CONGRATULATIONS!",
+  "quizFailedMessageLarge": "OH NO! KEEP TRYING!",
+  "quizScoreDetailed": "You got {score} out of {total} correct answers.",
+   "@quizScoreDetailed": { "placeholders": { "score": {}, "total": {} } },
+  "quizPercentageDetailed": "That's a {percentage}% accuracy.",
+  "@quizPercentageDetailed": { "placeholders": { "percentage": {} } },
+  "quizMainMenuButton": "Main Menu",
+  "quizResultTimedOutInfo": "You ran out of time on this attempt."
+}
