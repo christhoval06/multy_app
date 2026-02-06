@@ -2,7 +2,7 @@ name: multiplication_app
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.1.0+1
 
 environment:
   sdk: ^3.7.2
@@ -34,16 +34,23 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  
+
   flutter_localizations:
     sdk: flutter
 
-  intl: ^0.19.0
+  intl: ^0.20.2
   google_fonts: ^6.2.1
-  provider: ^6.0.0 
+  provider: ^6.0.0
   confetti: ^0.7.0
   audioplayers: ^5.2.1
   haptic_feedback: ^0.5.1+1
+  objectbox: ^4.2.0
+  objectbox_flutter_libs: ^4.2.0
+  path_provider: ^2.1.5
+  path: ^1.9.1
+  package_info_plus: ^8.3.0
+  url_launcher: ^6.3.1
+  flutter_card_swiper: ^7.0.2
 
 dev_dependencies:
   flutter_test:
@@ -58,13 +65,14 @@ dev_dependencies:
   flutter_launcher_icons: "^0.14.3"
   flutter_native_splash: ^2.4.6
   flutter_app_rename_tool: ^1.0.2
+  build_runner: ^2.4.15
+  objectbox_generator: ^4.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -73,6 +81,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/sounds/
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -109,7 +118,7 @@ flutter_app_rename_tool:
   flutter:
     enable: false
     app_name: multiplication_app
-  
+
   ios:
     app_name: Multy
     bundle_name: Multy
@@ -118,7 +127,7 @@ flutter_app_rename_tool:
   android:
     app_name: Multy
     package_name: dev.christhoval.apps.multy
-  
+
 flutter_launcher_icons:
   android: true
   ios: true

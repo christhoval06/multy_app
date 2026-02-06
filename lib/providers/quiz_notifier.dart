@@ -3,7 +3,9 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/foundation.dart'; // Para ChangeNotifier
 import 'package:multiplication_app/configs/settings.dart';
+import 'package:multiplication_app/models/quiz_attemp.dart';
 import 'package:multiplication_app/models/quiz_question.dart';
+import 'package:multiplication_app/providers/quiz_attemp_provider.dart';
 
 // Clase auxiliar para el resultado final
 class QuizResult {
@@ -23,6 +25,8 @@ class QuizResult {
 }
 
 class QuizNotifier extends ChangeNotifier {
+
+  final QuizAttempProvider quizAttempProvider;
   final int tableNumber;
 
   // --- Estado ---
@@ -49,7 +53,7 @@ class QuizNotifier extends ChangeNotifier {
       _totalQuestions; // Exporta el total si la UI lo necesita
 
   // --- Constructor ---
-  QuizNotifier(this.tableNumber) {
+  QuizNotifier(this.quizAttempProvider, this.tableNumber) {
     // Configuración inicial si fuera necesaria (tiempo, etc.)
     _remainingSeconds = 60;
     // Iniciar el quiz al crear el notifier
@@ -135,6 +139,21 @@ class QuizNotifier extends ChangeNotifier {
       timedOut: timedOut,
       percentage: percentage,
     );
+
+    final newQuizAttemp  = QuizAttemp(
+         timestamp: DateTime.now(),
+      // Aquí es donde necesitas saber qué tabla se estaba jugando
+      // Si tu QuizScreen recibe el número de tabla, úsalo.
+      // Si lo derivas de `difficulty` o `_currentQuestion`, asegúrate que sea correcto.
+      tableNumber: tableNumber, // ¡¡IMPORTANTE: ASEGURA QUE ESTO SEA CORRECTO!!
+      correctAnswers: score,
+      totalQuestions: questions.length, // o _questionsPerQuizSession
+      durationInSeconds: timedOut ? Settings.quizTime : _remainingSeconds,
+    );
+
+    quizAttempProvider.createQuizAttemp(newQuizAttemp);
+    
+    quizAttempProvider.updateTableOverallStats(newQuizAttemp);
 
     notifyListeners(); // Notifica que el quiz ha terminado y hay resultado
   }

@@ -1,5 +1,7 @@
 import 'package:haptic_feedback/haptic_feedback.dart';
 
+import 'package:multiplication_app/utils/debug.dart';
+
 class Vibrate {
   static Future<void> vibrate({bool correct = true}) async {
     try {
@@ -11,10 +13,10 @@ class Vibrate {
           await Haptics.vibrate(HapticsType.error);
         }
       } else {
-        print("El dispositivo no soporta vibración.");
+        Debug.print("El dispositivo no soporta vibración.");
       }
     } catch (e) {
-      print("Error al intentar vibrar: $e");
+      Debug.print("Error al intentar vibrar: $e");
     }
   }
 }

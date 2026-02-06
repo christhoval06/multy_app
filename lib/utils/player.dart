@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:multiplication_app/utils/debug.dart';
 
 class Player {
   final AudioPlayer audioPlayer = AudioPlayer();
@@ -22,7 +23,7 @@ class Player {
       });
     } catch (e) {
       // Manejar errores si el archivo no se encuentra o no se puede reproducir
-      print("Error al reproducir sonido: $e");
+      Debug.print("Error al reproducir sonido: $e");
     }
   }
 

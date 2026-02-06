@@ -1,8 +1,8 @@
 // lib/screens/practice_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:multiplication_app/l10n/app_localizations.dart';
 import 'package:multiplication_app/configs/route_paths.dart';
 
 class PracticeScreen extends StatefulWidget {
@@ -57,9 +57,11 @@ class _PracticeScreenState extends State<PracticeScreen> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(correctCount == 12
-              ? l10n.congratulationsDialogTitle
-              : l10n.summaryDialogTitle),
+          title: Text(
+            correctCount == 12
+                ? l10n.congratulationsDialogTitle
+                : l10n.summaryDialogTitle,
+          ),
           content: Text(l10n.summaryDialogContent(correctCount)),
           actions: <Widget>[
             TextButton(
@@ -120,7 +122,6 @@ class _PracticeScreenState extends State<PracticeScreen> {
               // --- CAMBIO AQUÍ: USA ListView.separated ---
               child: ListView.separated(
                 itemCount: 12, // Número total de elementos
-
                 // El itemBuilder sigue siendo el mismo que antes
                 itemBuilder: (context, index) {
                   int multiplier = index + 1;
@@ -128,15 +129,22 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
                   // El Padding y Row para cada item no cambian
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6.0), // Padding vertical para cada item
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 6.0,
+                    ), // Padding vertical para cada item
                     child: Row(
                       children: [
                         SizedBox(
                           width: 85,
                           child: Text(
-                            l10n.multiplicationOperation(widget.tableNumber, multiplier),
+                            l10n.multiplicationOperation(
+                              widget.tableNumber,
+                              multiplier,
+                            ),
                             style: GoogleFonts.luckiestGuy(
-                                fontSize: 18, fontWeight: FontWeight.w500),
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
                             textAlign: TextAlign.right,
                           ),
                         ),
@@ -152,30 +160,48 @@ class _PracticeScreenState extends State<PracticeScreen> {
                               LengthLimitingTextInputFormatter(3),
                             ],
                             textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                             decoration: InputDecoration(
                               hintText: l10n.answerHint,
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 10,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: _getBorderColor(index), width: 1.5),
+                                borderSide: BorderSide(
+                                  color: _getBorderColor(index),
+                                  width: 1.5,
+                                ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2.0),
+                                borderSide: BorderSide(
+                                  color: Theme.of(context).primaryColor,
+                                  width: 2.0,
+                                ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              errorText: (_isGraded && _results[index] == false)
-                                  ? l10n.correctAnswerWas(correctAnswer)
-                                  : null,
-                              errorStyle: const TextStyle(fontSize: 11, color: Colors.redAccent, fontWeight: FontWeight.w500),
+                              errorText:
+                                  (_isGraded && _results[index] == false)
+                                      ? l10n.correctAnswerWas(correctAnswer)
+                                      : null,
+                              errorStyle: const TextStyle(
+                                fontSize: 11,
+                                color: Colors.redAccent,
+                                fontWeight: FontWeight.w500,
+                              ),
                               errorMaxLines: 1,
                             ),
-                            textInputAction: (index < 11)
-                                ? TextInputAction.next
-                                : TextInputAction.done,
+                            textInputAction:
+                                (index < 11)
+                                    ? TextInputAction.next
+                                    : TextInputAction.done,
                             onSubmitted: (_) {
                               if (index < 11) {
                                 FocusScope.of(context).nextFocus();
@@ -198,75 +224,107 @@ class _PracticeScreenState extends State<PracticeScreen> {
                 separatorBuilder: (context, index) {
                   // Devuelve un Divider (línea horizontal)
                   return Divider(
-                    color: Colors.grey.shade300, // Color del separador (opcional)
-                    thickness: 1.0,           // Grosor del separador (opcional)
-                    height: 10,               // Altura total del espacio del separador (incluye espacio arriba/abajo)
+                    color:
+                        Colors.grey.shade300, // Color del separador (opcional)
+                    thickness: 1.0, // Grosor del separador (opcional)
+                    height:
+                        10, // Altura total del espacio del separador (incluye espacio arriba/abajo)
                     // indent: 16,            // Sangría izquierda (opcional)
                     // endIndent: 16,         // Sangría derecha (opcional)
                   );
                   // O podrías devolver solo espacio: return SizedBox(height: 10);
                 },
-                // --- FIN DE separatorBuilder ---
 
+                // --- FIN DE separatorBuilder ---
               ),
               // --- FIN DE ListView.separated ---
             ),
             const SizedBox(height: 20),
 
-            Row( // Envuelve los botones en un Row si quieres ponerlos lado a lado
+            Row(
+              // Envuelve los botones en un Row si quieres ponerlos lado a lado
               mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Espaciado
               children: [
-                 if (_isGraded) // Mostrar "Intentar de nuevo" solo si ya calificó
-                    ElevatedButton.icon(
-                      icon: const Icon(Icons.refresh),
-                      label: Text(l10n.tryAgainButton),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
-                        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                if (_isGraded) // Mostrar "Intentar de nuevo" solo si ya calificó
+                  ElevatedButton.icon(
+                    icon: const Icon(Icons.refresh),
+                    label: Text(l10n.tryAgainButton),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueAccent,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 25,
+                        vertical: 12,
                       ),
-                      onPressed: _resetQuiz,
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                     ),
+                    onPressed: _resetQuiz,
+                  ),
 
                 if (!_isGraded) // Mostrar "Calificar" solo si NO calificó
-                   ElevatedButton.icon(
-                     icon: const Icon(Icons.check_circle),
-                     label: Text(l10n.gradeButton),
-                     style: ElevatedButton.styleFrom(
-                       backgroundColor: Colors.amber.shade700,
-                       foregroundColor: Colors.black,
-                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                       textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                     ),
-                     onPressed: () => _gradeAnswers(l10n),
-                   ),
+                  ElevatedButton.icon(
+                    icon: const Icon(Icons.check_circle),
+                    label: Text(l10n.gradeButton),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amber.shade700,
+                      foregroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 15,
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    onPressed: () => _gradeAnswers(l10n),
+                  ),
 
                 // --- BOTÓN PARA IR AL TEST ---
                 OutlinedButton.icon(
-                   icon: const Icon(Icons.quiz_outlined),
-                   label: Text(l10n.practiceScreenTestButton), // "¡Hacer un Test!"
-                   style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.deepPurple,
-                      side: const BorderSide(color: Colors.deepPurple, width: 1.5),
-                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                       textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                   ),
-                   onPressed: () {
-                      // Navegar a QuizScreen pasando el número de tabla actual
-                      Navigator.pushNamed(
-                         context,
-                         RoutePaths.multiplicationQuiz,
-                         arguments: widget.tableNumber,
-                      );
-                   },
+                  icon: const Icon(Icons.quiz_outlined),
+                  label: Text(
+                    l10n.practiceScreenTestButton,
+                  ), // "¡Hacer un Test!"
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.deepPurple,
+                    side: const BorderSide(
+                      color: Colors.deepPurple,
+                      width: 1.5,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  onPressed: () {
+                    // Navegar a QuizScreen pasando el número de tabla actual
+                    Navigator.pushNamed(
+                      context,
+                      RoutePaths.multiplicationQuiz,
+                      arguments: widget.tableNumber,
+                    );
+                  },
                 ),
-                 // --- FIN BOTÓN TEST ---
+                // --- FIN BOTÓN TEST ---
               ],
-            )
+            ),
           ],
         ),
       ),

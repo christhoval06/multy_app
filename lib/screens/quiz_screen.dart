@@ -1,8 +1,8 @@
 import 'dart:async'; // Para Future
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'package:multiplication_app/l10n/app_localizations.dart';
 import 'package:multiplication_app/configs/route_paths.dart';
 import 'package:multiplication_app/providers/quiz_notifier.dart';
 import 'package:multiplication_app/utils/vibrate.dart';

@@ -6,4 +6,7 @@ class RoutePaths {
   static const String multiplicationPractice = '/practice';
   static const String multiplicationQuiz = '/quiz';
   static const String multiplicationQuizResults = '/multiplication/quiz/results';
+  static const String stats = '/stats';
+  static const String settings = '/settings';
+  static const String study = '/study';
 }

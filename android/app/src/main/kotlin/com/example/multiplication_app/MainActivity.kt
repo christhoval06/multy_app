@@ -1,4 +1,4 @@
-package com.example.multiplication_app
+package dev.christhoval.apps.multy
 
 import io.flutter.embedding.android.FlutterActivity
 

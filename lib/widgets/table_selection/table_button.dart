@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:multiplication_app/configs/route_paths.dart';
-
 class TableButton extends StatelessWidget {
   final int tableNumber;
-  const TableButton({super.key, required this.tableNumber});
+  final String nextRoute;
+  
+  const TableButton({super.key, required this.tableNumber, required this.nextRoute});
 
   void _navigateToPracticeScreen(BuildContext context, int tableNumber) {
     Navigator.pushNamed(
       context,
-      RoutePaths.multiplicationQuiz, // Usa el nombre de la ruta definida
+      // RoutePaths.multiplicationQuiz, // Usa el nombre de la ruta definida
+      nextRoute,
       arguments: tableNumber, // Pasa el número de la tabla como argumento
     );
   }

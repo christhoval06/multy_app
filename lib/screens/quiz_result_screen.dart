@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:confetti/confetti.dart';
 
+import 'package:multiplication_app/l10n/app_localizations.dart';
 import 'package:multiplication_app/providers/quiz_notifier.dart'; // Importa el Notifier y el QuizResult
 import 'package:multiplication_app/utils/emoji.dart';
 

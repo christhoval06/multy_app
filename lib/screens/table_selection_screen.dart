@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:multiplication_app/configs/settings.dart';
+import 'package:multiplication_app/l10n/app_localizations.dart';
 
 import 'package:multiplication_app/widgets/table_selection/table_button.dart';
 
 class TableSelectionScreen extends StatelessWidget {
-  const TableSelectionScreen({super.key});
+  final String nextRoute;
+  const TableSelectionScreen({super.key, required this.nextRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,10 @@ class TableSelectionScreen extends StatelessWidget {
                 mainAxisSpacing: 15.0,
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                 children: List.generate(Settings.maxTableNumber, (index) {
-                  return TableButton(tableNumber: index + 1);
+                  return TableButton(
+                    tableNumber: index + 1,
+                    nextRoute: nextRoute,
+                  );
                 }),
               ),
             ),

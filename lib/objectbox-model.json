@@ -1,0 +1,108 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4165570517916600519",
+      "lastPropertyId": "6:9122534839994369263",
+      "name": "QuizAttemp",
+      "properties": [
+        {
+          "id": "1:4876238966227809832",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6909058053986422622",
+          "name": "timestamp",
+          "type": 10
+        },
+        {
+          "id": "3:4312291191362885146",
+          "name": "tableNumber",
+          "type": 6
+        },
+        {
+          "id": "4:8324536110113187326",
+          "name": "correctAnswers",
+          "type": 6
+        },
+        {
+          "id": "5:7312094887810469062",
+          "name": "totalQuestions",
+          "type": 6
+        },
+        {
+          "id": "6:9122534839994369263",
+          "name": "durationInSeconds",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:7922726385351882690",
+      "lastPropertyId": "8:1725148359479206162",
+      "name": "TableOverallStats",
+      "properties": [
+        {
+          "id": "1:1822466487713846490",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6911105050596604463",
+          "name": "tableNumber",
+          "type": 6,
+          "flags": 8,
+          "indexId": "1:3755971674110176557"
+        },
+        {
+          "id": "3:2819264881433091199",
+          "name": "totalAttempts",
+          "type": 6
+        },
+        {
+          "id": "4:4149257674861590095",
+          "name": "totalCorrectAnswersSum",
+          "type": 6
+        },
+        {
+          "id": "5:8990777041937248253",
+          "name": "totalQuestionsSum",
+          "type": 6
+        },
+        {
+          "id": "6:3862316502265845973",
+          "name": "bestTimeInSeconds",
+          "type": 6
+        },
+        {
+          "id": "7:6734904607425124203",
+          "name": "bestScoreCorrect",
+          "type": 6
+        },
+        {
+          "id": "8:1725148359479206162",
+          "name": "bestScoreTotal",
+          "type": 6
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:7922726385351882690",
+  "lastIndexId": "1:3755971674110176557",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
