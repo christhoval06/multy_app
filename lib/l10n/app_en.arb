@@ -1,0 +1,239 @@
+{
+  "@@locale": "en",
+  "appTitle": "Multiplication Tables",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "selectTableTitle": "Select a option",
+  "selectTablePrompt": "Which table do you want to practice today?",
+  "practiceButton": "Practice!",
+  "practiceScreenTitle": "Practicing Table {tableNumber}",
+  "@practiceScreenTitle": {
+    "description": "Title for the practice screen",
+    "placeholders": {
+      "tableNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "multiplicationOperation": "{factor1} x {factor2} = ",
+   "@multiplicationOperation": {
+      "description": "The multiplication calculation shown",
+      "placeholders": {
+          "factor1": { "type": "int" },
+          "factor2": { "type": "int" }
+      }
+   },
+  "answerHint": "?",
+  "gradeButton": "Grade",
+  "tryAgainButton": "Try Again",
+  "summaryDialogTitle": "Summary",
+  "congratulationsDialogTitle": "Congratulations!",
+  "summaryDialogContent": "You got {correctCount} out of 12 correct answers.",
+   "@summaryDialogContent": {
+        "description": "Text showing the score in the summary dialog",
+        "placeholders": {
+            "correctCount": { "type": "int" }
+        }
+   },
+  "dialogOkButton": "OK",
+  "correctAnswerWas": "It was {correctAnswer}",
+   "@correctAnswerWas": {
+        "description": "Error message showing the correct answer",
+        "placeholders": {
+            "correctAnswer": { "type": "int" }
+        }
+   },
+  "practiceScreenTestButton": "Take a Quiz!",
+  "@practiceScreenTestButton": { "description": "Button on practice screen to start the quiz" },
+  "quizScreenTitle": "Quiz: Table {tableNumber}",
+  "@quizScreenTitle": { "placeholders": { "tableNumber": { "type": "int" } } },
+  "quizTimeLabel": "Time",
+  "quizQuestionProgress": "Question {current} / {total}",
+  "@quizQuestionProgress": { "placeholders": { "current": {}, "total": {} } },
+  "quizEndedMessage": "Quiz Finished!",
+  "quizTimeOutTitle": "Time's Up!",
+  "quizCompleteTitle": "Quiz Complete!",
+  "quizScoreMessage": "Your score: {score} out of {total}",
+  "@quizScoreMessage": { "placeholders": { "score": {}, "total": {} } },
+  "quizPercentageMessage": "Percentage: {percentage}%",
+  "@quizPercentageMessage": { "placeholders": { "percentage": {} } },
+  "quizPassedMessage": "You passed!",
+  "quizFailedMessage": "Keep practicing!",
+  "quizRetryButton": "Retry",
+  "quizBackToMenuButton": "Back to Menu",
+  "quizCannotExitMessage": "You cannot exit the quiz while it's in progress!",
+  "quizResultScreenTitle": "Results: Table {tableNumber}",
+  "@quizResultScreenTitle": { "placeholders": { "tableNumber": {} } },
+  "quizPassedMessageLarge": "CONGRATULATIONS!",
+  "quizFailedMessageLarge": "OH NO! KEEP TRYING!",
+  "quizScoreDetailed": "You got {score} out of {total} correct answers.",
+   "@quizScoreDetailed": { "placeholders": { "score": {}, "total": {} } },
+  "quizPercentageDetailed": "That's a {percentage}% accuracy.",
+  "@quizPercentageDetailed": { "placeholders": { "percentage": {} } },
+  "quizMainMenuButton": "Main Menu",
+  "quizResultTimedOutInfo": "You ran out of time on this attempt.",
+  "statisticsTitle": "My Progress",
+  "overallStats": "Overall Statistics",
+  "totalQuizzesPlayed": "Total Quizzes Played: {count}",
+  "@totalQuizzesPlayed": { "placeholders": { "count": {} } },
+  "overallAccuracy": "Overall Accuracy: {accuracy}%",
+  "@overallAccuracy": { "placeholders": { "accuracy": {} } },
+  "statsByTable": "Statistics by Table",
+  "tableNumberHeader": "Table {number}",
+  "@tableNumberHeader": { "placeholders": { "number": {} } },
+  "attempts": "Attempts: {count}",
+  "@attempts": { "placeholders": { "count": {} } },
+  "accuracy": "Accuracy: {accuracy}%",
+  "@accuracy": { "placeholders": { "accuracy": {} } },
+  "bestScore": "Best: {correct}/{total}",
+  "@bestScore": {
+    "placeholders": {
+      "correct": {},
+      "total": {}
+    }
+  },
+  "noAttemptsYet": "No attempts yet for this table.",
+  "noStatsAvailable": "No statistics available yet. Play some quizzes!",
+  "loadingStats": "Loading statistics...",
+  "bestTime": "Best Time: {time}",
+  "@bestTime": {
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "01:30"
+      }
+    }
+  },
+  "menuStats": "Show Stats",
+  "menuSettings": "Settings",
+
+  "settingsTitle": "Settings",
+  "settingsLoading": "Loading...",
+  "settingsAppName": "Multy",
+  "settingsAppDescription": "An educational application developed in Flutter for children aged 4 to 10 to learn and practice multiplication tables in a fun, fast, and interactive way.",
+  "settingsVersionNotAvailable": "Not available",
+  "settingsCouldNotOpenEmail": "Could not open email app.",
+  "settingsCouldNotOpenLink": "Could not open link: {urlString}",
+  "@settingsCouldNotOpenLink": {
+    "placeholders": { "urlString": {} }
+  },
+  "settingsDestructiveActionTitle": "⚠️ Destructive Action!",
+  "settingsDestructiveActionContent": "You are about to delete ALL application data.\n\nThis action CANNOT BE UNDONE.\n\nAre you absolutely sure?",
+  "settingsCancel": "CANCEL",
+  "settingsConfirmDeleteAll": "YES, DELETE ALL",
+  "settingsFinalConfirmationTitle": "FINAL CONFIRMATION",
+  "settingsFinalConfirmationContent": "To confirm, type \"DELETE\" in the field below:",
+  "settingsFinalConfirmationHint": "DELETE",
+  "settingsDeleteDataNow": "DELETE DATA NOW",
+  "settingsIncorrectConfirmationText": "Incorrect confirmation text.",
+  "settingsAllDataDeleted": "All data has been deleted.",
+  "settingsSectionAppInfo": "App Information",
+  "settingsAppVersion": "App Version",
+  "settingsTermsAndConditions": "Terms and Conditions",
+  "settingsPrivacyPolicy": "Privacy Policy",
+  "settingsSectionDeveloper": "Developer",
+  "settingsDeveloperName": "Christhoval Barba",
+  "settingsDeveloperDescription": "Developer of this application",
+  "settingsPorfolio": "Personal Site",
+  "settingsPorfolioWeb": "s.christhoval.dev",
+  "settingsGitHubProfile": "GitHub Profile",
+  "settingsGitHubUsername": "github.com/christhoval06",
+  "settingsLinkedInProfile": "LinkedIn",
+  "settingsLinkedInUsername": "christhoval",
+  "settingsContactDeveloper": "Contact",
+  "settingsSectionSupport": "Support",
+  "settingsReportProblem": "Report a Problem",
+  "settingsSectionDataManagement": "Data Management",
+  "settingsDeleteAllDataTitle": "Delete All Data",
+  "settingsDeleteAllDataSubtitle": "Deletes all raffles, numbers, and buyers.",
+
+  "studyTableTitle": "Studying the Table of {tableNumber}",
+  "@studyTableTitle": {
+    "placeholders": { "tableNumber": {} }
+  },
+  "previous": "Previous",
+  "next": "Next",
+  "speak": "Speak",
+  "speakTimes": "times",
+  "speakEquals": "equals",
+
+  "funFactTable2Multiplier1": "You have 2 eyes to see the world!",
+  "funFactTable2Multiplier2": "A bicycle has 2 wheels.",
+  "funFactTable2Multiplier4": "A pair of shoes are 2 shoes.",
+  "funFactTable2Multiplier5": "Most people have 2 hands and 2 feet.",
+  "funFactTable2Multiplier10": "20 is double 10, like having two 10-dollar bills!",
+
+  "funFactTable3Multiplier1": "A tricycle has 3 wheels.",
+  "funFactTable3Multiplier2": "A traffic light has 3 lights: red, yellow, and green.",
+  "funFactTable3Multiplier3": "3 x 3 is 9, a magical square number!",
+  "funFactTable3Multiplier4": "A lucky clover usually has 3 leaves (sometimes 4!).",
+
+  "funFactTable4Multiplier1": "A square has 4 equal sides.",
+  "funFactTable4Multiplier2": "Most cars have 4 wheels.",
+  "funFactTable4Multiplier3": "The seasons of the year are 4: spring, summer, autumn, and winter.",
+
+  "funFactTable5Multiplier1": "You have 5 fingers on each hand!",
+  "funFactTable5Multiplier2": "A starfish commonly has 5 arms.",
+  "funFactTable5Multiplier3": "A pentagon is a shape with 5 sides.",
+  "funFactTable5Multiplier4": "A lustrum is 5 years.",
+  "funFactTable5Multiplier10": "Counting to 50 is like counting 5 times to 10.",
+
+  "funFactTable6Multiplier1": "A common die has 6 faces.",
+  "funFactTable6Multiplier2": "Insects have 6 legs.",
+  "funFactTable6Multiplier3": "A guitar usually has 6 strings.",
+
+  "funFactTable7Multiplier1": "There are 7 days in a week!",
+  "funFactTable7Multiplier2": "The colors of the rainbow are 7.",
+  "funFactTable7Multiplier3": "Snow White met 7 dwarfs.",
+  "funFactTable7Multiplier4": "The 7 wonders of the ancient world were amazing constructions.",
+
+  "funFactTable8Multiplier1": "A spider has 8 legs.",
+  "funFactTable8Multiplier2": "An octopus has 8 tentacles.",
+  "funFactTable8Multiplier3": "In music, an octave has 8 notes.",
+
+  "funFactTable9Multiplier1": "A cat is said to have 9 lives (it's just a saying!).",
+  "funFactTable9Multiplier2": "A full baseball game has 9 innings.",
+  "funFactTable9Multiplier3": "Sudoku is played on a 9x9 grid.",
+
+  "funFactTable10Multiplier1": "You have 10 fingers in total on your hands!",
+  "funFactTable10Multiplier2": "A decade is 10 years.",
+  "funFactTable10Multiplier3": "The decimal system we use is based on the number 10.",
+  "funFactTable10Multiplier5": "50 is half of 100, and 5 x 10!",
+
+  "funFactTable11Multiplier1": "A soccer team has 11 players on the field.",
+  "funFactTable11Multiplier2": "If you count your fingers and one foot, you almost get to 11 (it's 15)!",
+
+  "funFactTable12Multiplier1": "A year has 12 months.",
+  "funFactTable12Multiplier2": "A dozen is 12 things, like a dozen eggs!",
+  "funFactTable12Multiplier3": "A clock shows 12 hours (in 12-hour format).",
+
+  "funFactGeneric1": "Math is like a superpower!",
+  "funFactGeneric2": "Practicing a little bit every day makes you a tables champion.",
+  "funFactGeneric3": "Keep it up, you're doing wonderfully!",
+  "funFactGeneric4": "Numbers help us understand the world.",
+  "funFactGeneric5": "Learning is the best adventure.",
+  "funFactGeneric6": "Every number has its own secret story.",
+  "funFactGeneric7": "Wow, you are so smart!",
+  "funFactGeneric8": "Discover the magic in every multiplication.",
+
+  "tableSelectionTitle": "Select a Table",
+  "tableActionScreenTitle": "Table of {tableNumber}: What to do?",
+  "@tableActionScreenTitle": {
+    "placeholders": { "tableNumber": {} }
+  },
+  "studyAction": "Study a Table",
+  "quizAction": "Take a Quiz",
+  "onboardingSkip": "Skip",
+  "onboardingNext": "Next",
+  "onboardingStart": "Start adventure",
+  "onboardingSlide1Title": "Turn multiplication into your superpower",
+  "onboardingSlide1Description": "Learn with dynamic challenges and discover that math practice can feel exciting and fun.",
+  "onboardingSlide2Title": "Level up every round",
+  "onboardingSlide2Description": "Answer faster, build confidence, and sharpen your mind with short focused sessions.",
+  "onboardingSlide3Title": "Break your own records",
+  "onboardingSlide3Description": "Track your progress, celebrate every win, and master each table like a champion.",
+
+  "homeGreeting": "What do you want to do today?"
+}
