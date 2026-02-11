@@ -18,14 +18,13 @@ class HomeScreen extends StatelessWidget {
         ), // Ej: "Tabla del 7: ¿Qué quieres hacer?"
         centerTitle: true,
         actions: [
-          IconButton(
-            // Botón para Estadísticas
-            icon: const Icon(Icons.bar_chart),
-            tooltip: l10n.menuStats,
-            onPressed: () {
-              Navigator.of(context).pushNamed(RoutePaths.stats);
-            },
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.bar_chart),
+          //   tooltip: l10n.menuStats,
+          //   onPressed: () {
+          //     Navigator.of(context).pushNamed(RoutePaths.stats);
+          //   },
+          // ),
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             tooltip: l10n.menuSettings,
