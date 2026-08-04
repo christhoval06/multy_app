@@ -11,17 +11,62 @@ class QuizButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final quizNotifier = context.watch<QuizNotifier>();
+    final selectedOption = quizNotifier.selectedOption;
+    final isAnswered = selectedOption != null;
+    final isSelected = selectedOption == option;
+    final currentQuestion = quizNotifier.currentQuestion;
+    final isCorrectOption = currentQuestion?.correctAnswer == option;
+
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: _getOptionButtonColor(context, option),
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(24.0),
         ),
-        textStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        elevation: isSelected ? 1 : 5,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+        textStyle: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
       ),
-      child: Text('$option'),
+      child: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            child: Container(
+              width: 34,
+              height: 34,
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.16),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                isAnswered
+                    ? (isCorrectOption
+                        ? Icons.check_rounded
+                        : (isSelected
+                            ? Icons.close_rounded
+                            : Icons.circle_outlined))
+                    : Icons.touch_app_rounded,
+                color: Colors.white.withValues(alpha: 0.92),
+                size: 18,
+              ),
+            ),
+          ),
+          Center(
+            child: Text(
+              '$option',
+              style: const TextStyle(
+                fontSize: 34,
+                fontWeight: FontWeight.w900,
+                height: 1,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

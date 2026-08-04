@@ -12,6 +12,11 @@ final ThemeData customTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.green,
     foregroundColor: Colors.white,
+    titleTextStyle: TextStyle(
+      fontFamily: AppFonts.display,
+      fontSize: 22,
+      color: Colors.white,
+    ),
   ),
   textTheme: customTextTheme,
   inputDecorationTheme: InputDecorationTheme(

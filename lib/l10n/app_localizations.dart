@@ -113,6 +113,54 @@ abstract class AppLocalizations {
   /// **'Which table do you want to practice today?'**
   String get selectTablePrompt;
 
+  /// Title shown on the table selection screen when the user is about to enter study mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a table to study'**
+  String get selectStudyTableTitle;
+
+  /// Main prompt shown on the table selection screen for study mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a table and explore it step by step at your own pace.'**
+  String get selectStudyTablePrompt;
+
+  /// Supporting helper copy shown in the study mode hero on the table selection screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Review patterns, repeat facts, and build confidence before the quiz.'**
+  String get selectStudyTableHelper;
+
+  /// Title shown on the table selection screen when the user is about to enter quiz mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a table for your quiz'**
+  String get selectQuizTableTitle;
+
+  /// Main prompt shown on the table selection screen for quiz mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a table and test your speed with a quick challenge.'**
+  String get selectQuizTablePrompt;
+
+  /// Supporting helper copy shown in the quiz mode hero on the table selection screen.
+  ///
+  /// In en, this message translates to:
+  /// **'You will answer fast questions and see your score right away.'**
+  String get selectQuizTableHelper;
+
+  /// Short label shown inside a table card when the selection screen is in study mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Study mode'**
+  String get tableCardStudyLabel;
+
+  /// Short label shown inside a table card when the selection screen is in quiz mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz mode'**
+  String get tableCardQuizLabel;
+
   /// No description provided for @practiceButton.
   ///
   /// In en, this message translates to:
@@ -305,6 +353,42 @@ abstract class AppLocalizations {
   /// **'You ran out of time on this attempt.'**
   String get quizResultTimedOutInfo;
 
+  /// No description provided for @quizResultCorrectLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct'**
+  String get quizResultCorrectLabel;
+
+  /// No description provided for @quizResultTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get quizResultTimeLabel;
+
+  /// No description provided for @quizResultBestTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Best time'**
+  String get quizResultBestTimeLabel;
+
+  /// No description provided for @quizResultNewRecord.
+  ///
+  /// In en, this message translates to:
+  /// **'New record'**
+  String get quizResultNewRecord;
+
+  /// No description provided for @quizResultKeepGoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep going!'**
+  String get quizResultKeepGoing;
+
+  /// No description provided for @quizResultRetryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Beat your best time'**
+  String get quizResultRetryHint;
+
   /// No description provided for @statisticsTitle.
   ///
   /// In en, this message translates to:
@@ -376,6 +460,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading statistics...'**
   String get loadingStats;
+
+  /// Subtitle shown on the stats screen when a persistent profile is active.
+  ///
+  /// In en, this message translates to:
+  /// **'Showing progress for {name}'**
+  String statsForProfile(Object name);
+
+  /// Title shown on the stats screen when the guest profile is selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest session'**
+  String get statsGuestTitle;
+
+  /// Explanation shown on the stats screen for guest mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest sessions are not saved, so there is no history yet.'**
+  String get statsGuestSubtitle;
+
+  /// Title shown on the stats screen when no profile has been selected yet.
+  ///
+  /// In en, this message translates to:
+  /// **'No profile selected'**
+  String get statsNoProfileTitle;
+
+  /// Message shown on the stats screen when there is no active profile selection.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a profile on the home screen to see saved progress.'**
+  String get statsNoProfileSubtitle;
+
+  /// Header for the per-profile session history section on the stats screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Session History'**
+  String get sessionHistoryTitle;
+
+  /// Short explanation for the per-profile session history section.
+  ///
+  /// In en, this message translates to:
+  /// **'Your most recent quizzes for this profile.'**
+  String get sessionHistorySubtitle;
+
+  /// Empty state message when a persistent profile has no saved history yet.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved sessions yet for this profile.'**
+  String get sessionHistoryEmpty;
+
+  /// Score label for an individual quiz session entry.
+  ///
+  /// In en, this message translates to:
+  /// **'Score {correct}/{total}'**
+  String sessionHistoryScore(Object correct, Object total);
+
+  /// Accuracy label for an individual quiz session entry.
+  ///
+  /// In en, this message translates to:
+  /// **'Accuracy {accuracy}%'**
+  String sessionHistoryAccuracy(Object accuracy);
+
+  /// Button label to expand the session history list and show every saved quiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Show all {count} quizzes'**
+  String sessionHistoryShowAll(int count);
+
+  /// Button label to collapse the session history list back to the default preview.
+  ///
+  /// In en, this message translates to:
+  /// **'Show less'**
+  String get sessionHistoryShowLess;
 
   /// No description provided for @bestTime.
   ///
@@ -503,6 +659,60 @@ abstract class AppLocalizations {
   /// **'App Information'**
   String get settingsSectionAppInfo;
 
+  /// No description provided for @settingsSectionFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound & vibration'**
+  String get settingsSectionFeedback;
+
+  /// No description provided for @settingsSoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sounds'**
+  String get settingsSoundTitle;
+
+  /// No description provided for @settingsSoundSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Play short sounds when selecting profiles and showing results.'**
+  String get settingsSoundSubtitle;
+
+  /// No description provided for @settingsSoundOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound on'**
+  String get settingsSoundOn;
+
+  /// No description provided for @settingsSoundOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound off'**
+  String get settingsSoundOff;
+
+  /// No description provided for @settingsVibrationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vibration'**
+  String get settingsVibrationTitle;
+
+  /// No description provided for @settingsVibrationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use gentle vibration for selections and results.'**
+  String get settingsVibrationSubtitle;
+
+  /// No description provided for @settingsVibrationOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Vibration on'**
+  String get settingsVibrationOn;
+
+  /// No description provided for @settingsVibrationOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Vibration off'**
+  String get settingsVibrationOff;
+
   /// No description provided for @settingsAppVersion.
   ///
   /// In en, this message translates to:
@@ -593,11 +803,107 @@ abstract class AppLocalizations {
   /// **'Report a Problem'**
   String get settingsReportProblem;
 
+  /// No description provided for @settingsSupportSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send feedback or report an issue.'**
+  String get settingsSupportSubtitle;
+
+  /// No description provided for @settingsSectionProfiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Profiles'**
+  String get settingsSectionProfiles;
+
+  /// No description provided for @settingsSectionTiming.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice Timing'**
+  String get settingsSectionTiming;
+
+  /// No description provided for @settingsStudyTimerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Study card speed'**
+  String get settingsStudyTimerTitle;
+
+  /// No description provided for @settingsStudyTimerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose how fast the study cards move automatically.'**
+  String get settingsStudyTimerSubtitle;
+
+  /// No description provided for @settingsQuizTimerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz time limit'**
+  String get settingsQuizTimerTitle;
+
+  /// No description provided for @settingsQuizTimerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set how much time each quiz gives before it ends.'**
+  String get settingsQuizTimerSubtitle;
+
+  /// No description provided for @settingsRestoreTimerDefaultsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore default timers'**
+  String get settingsRestoreTimerDefaultsTitle;
+
+  /// No description provided for @settingsRestoreTimerDefaultsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to 5s for study cards and 50s for quizzes.'**
+  String get settingsRestoreTimerDefaultsSubtitle;
+
+  /// No description provided for @settingsChooseTimerValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a time'**
+  String get settingsChooseTimerValue;
+
   /// No description provided for @settingsSectionDataManagement.
   ///
   /// In en, this message translates to:
   /// **'Data Management'**
   String get settingsSectionDataManagement;
+
+  /// Settings entry title that opens the profile management screen
+  ///
+  /// In en, this message translates to:
+  /// **'Manage profiles'**
+  String get settingsManageProfilesTitle;
+
+  /// Settings entry subtitle describing profile management
+  ///
+  /// In en, this message translates to:
+  /// **'Create, edit, archive, or delete study profiles.'**
+  String get settingsManageProfilesSubtitle;
+
+  /// Summary line shown in settings with the total saved profiles count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} saved profiles on this device.'**
+  String settingsProfilesSummary(int count);
+
+  /// Summary line shown in settings with the currently active profile name.
+  ///
+  /// In en, this message translates to:
+  /// **'Active profile: {name}'**
+  String settingsProfilesActiveSummary(String name);
+
+  /// Short pill label in the settings overview card showing how many profiles exist.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} profiles'**
+  String settingsOverviewProfiles(int count);
+
+  /// Subtitle for the destructive action that clears quiz progress data
+  ///
+  /// In en, this message translates to:
+  /// **'Deletes all quiz attempts and statistics.'**
+  String get settingsDeleteProgressSubtitle;
 
   /// No description provided for @settingsDeleteAllDataTitle.
   ///
@@ -1012,6 +1318,252 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What do you want to do today?'**
   String get homeGreeting;
+
+  /// Title shown above the home profile selector
+  ///
+  /// In en, this message translates to:
+  /// **'Choose who is studying'**
+  String get homeProfileSelectorTitle;
+
+  /// Helper text shown below the home profile selector title
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a profile before starting to study or take a quiz.'**
+  String get homeProfileSelectorSubtitle;
+
+  /// Label for the temporary guest profile option on the home selector
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get homeProfileGuestLabel;
+
+  /// Message shown on home when no profile has been selected yet
+  ///
+  /// In en, this message translates to:
+  /// **'Select a profile to continue'**
+  String get homeProfileSelectionRequired;
+
+  /// Summary shown on home when a persistent profile is selected
+  ///
+  /// In en, this message translates to:
+  /// **'{name} will study'**
+  String homeProfileActiveSummary(String name);
+
+  /// Summary shown on home when guest mode is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Guest mode is active'**
+  String get homeProfileGuestSummary;
+
+  /// Helper text shown for guest mode on home
+  ///
+  /// In en, this message translates to:
+  /// **'Great for a quick practice session without saving history.'**
+  String get homeProfileGuestHelper;
+
+  /// Helper text shown when a persistent profile is active on home
+  ///
+  /// In en, this message translates to:
+  /// **'Progress and history will be saved only for this profile.'**
+  String get homeProfileActiveHelper;
+
+  /// Helper text shown when there is no active profile selection on home
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a profile or enter as guest to get started.'**
+  String get homeProfileNoSelectionHelper;
+
+  /// Title of the profile management screen
+  ///
+  /// In en, this message translates to:
+  /// **'Profiles'**
+  String get profileManagementTitle;
+
+  /// Helper text at the top of the profile management screen
+  ///
+  /// In en, this message translates to:
+  /// **'Set up the profiles that can study on this device.'**
+  String get profileManagementSubtitle;
+
+  /// Primary action label to create a new profile
+  ///
+  /// In en, this message translates to:
+  /// **'Create profile'**
+  String get profileManagementCreateAction;
+
+  /// Menu action label to edit a profile
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get profileManagementEditAction;
+
+  /// Menu action label to archive a profile
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get profileManagementArchiveAction;
+
+  /// Menu action label to delete a profile
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get profileManagementDeleteAction;
+
+  /// Short description shown under each profile name in the management screen
+  ///
+  /// In en, this message translates to:
+  /// **'Persistent profile with separate progress and history.'**
+  String get profileManagementProfileSummary;
+
+  /// Summary shown for archived profiles in the management screen
+  ///
+  /// In en, this message translates to:
+  /// **'Archived profile. It no longer appears on the home selector.'**
+  String get profileManagementArchivedSummary;
+
+  /// Message shown when the profile limit has been reached
+  ///
+  /// In en, this message translates to:
+  /// **'You can have up to {count} saved profiles.'**
+  String profileManagementMaxProfiles(int count);
+
+  /// Top summary with the number of saved profiles
+  ///
+  /// In en, this message translates to:
+  /// **'{current} of {max} saved profiles'**
+  String profileManagementSavedCount(int current, int max);
+
+  /// Helper text about guest mode on the profile management screen
+  ///
+  /// In en, this message translates to:
+  /// **'Guest will always be available on home for temporary sessions.'**
+  String get profileManagementGuestHint;
+
+  /// Badge shown on the active profile in profile management
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get profileManagementActiveBadge;
+
+  /// Badge shown on archived profiles in profile management
+  ///
+  /// In en, this message translates to:
+  /// **'Archived'**
+  String get profileManagementArchivedBadge;
+
+  /// Confirmation dialog title for archiving a profile
+  ///
+  /// In en, this message translates to:
+  /// **'Archive profile?'**
+  String get profileManagementArchiveTitle;
+
+  /// Confirmation message for archiving a profile
+  ///
+  /// In en, this message translates to:
+  /// **'The profile {name} will stop appearing on the home selector.'**
+  String profileManagementArchiveMessage(String name);
+
+  /// Confirmation dialog title for deleting a profile
+  ///
+  /// In en, this message translates to:
+  /// **'Delete profile?'**
+  String get profileManagementDeleteTitle;
+
+  /// Confirmation message for deleting a profile
+  ///
+  /// In en, this message translates to:
+  /// **'The profile {name} will be removed from the device.'**
+  String profileManagementDeleteMessage(String name);
+
+  /// Error message shown when creating a profile fails
+  ///
+  /// In en, this message translates to:
+  /// **'The profile could not be created.'**
+  String get profileManagementCreateError;
+
+  /// Error message shown when editing a profile fails
+  ///
+  /// In en, this message translates to:
+  /// **'The profile could not be updated.'**
+  String get profileManagementEditError;
+
+  /// Error message shown when archiving a profile fails
+  ///
+  /// In en, this message translates to:
+  /// **'The profile could not be archived.'**
+  String get profileManagementArchiveError;
+
+  /// Error message shown when deleting a profile fails
+  ///
+  /// In en, this message translates to:
+  /// **'The profile could not be deleted.'**
+  String get profileManagementDeleteError;
+
+  /// Title of the bottom sheet used to create a profile
+  ///
+  /// In en, this message translates to:
+  /// **'Create profile'**
+  String get profileFormCreateTitle;
+
+  /// Title of the bottom sheet used to edit a profile
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get profileFormEditTitle;
+
+  /// Label for the profile name field
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get profileFormNameLabel;
+
+  /// Hint shown in the profile name field
+  ///
+  /// In en, this message translates to:
+  /// **'Example: Mateo'**
+  String get profileFormNameHint;
+
+  /// Validation message when the profile name field is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a profile name.'**
+  String get profileFormNameRequired;
+
+  /// Section label for avatar choices in the profile form
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar'**
+  String get profileFormAvatarLabel;
+
+  /// Section label for color choices in the profile form
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get profileFormColorLabel;
+
+  /// Title for the profile preview inside the form
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get profileFormPreviewLabel;
+
+  /// Temporary name shown in the preview when the name field is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Your profile'**
+  String get profileFormPreviewPlaceholder;
+
+  /// Submit button label when creating a profile
+  ///
+  /// In en, this message translates to:
+  /// **'Save profile'**
+  String get profileFormCreateButton;
+
+  /// Submit button label when editing a profile
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get profileFormSaveButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

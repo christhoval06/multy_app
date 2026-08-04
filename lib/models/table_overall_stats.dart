@@ -10,6 +10,8 @@ class TableOverallStats {
   // Por ahora, lo manejaremos en la lógica de actualización.
   @Index() // Indexar para búsquedas rápidas
   int tableNumber;
+  @Index()
+  int profileId;
 
   int totalAttempts;
   int totalCorrectAnswersSum; // Suma de todas las respuestas correctas para esta tabla
@@ -23,6 +25,7 @@ class TableOverallStats {
   TableOverallStats({
     this.id = 0,
     required this.tableNumber,
+    required this.profileId,
     this.totalAttempts = 0,
     this.totalCorrectAnswersSum = 0,
     this.totalQuestionsSum = 0,

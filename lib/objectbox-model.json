@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:4165570517916600519",
-      "lastPropertyId": "6:9122534839994369263",
+      "lastPropertyId": "7:2519481821383777361",
       "name": "QuizAttemp",
       "properties": [
         {
@@ -38,13 +38,20 @@
           "id": "6:9122534839994369263",
           "name": "durationInSeconds",
           "type": 6
+        },
+        {
+          "id": "7:2519481821383777361",
+          "name": "profileId",
+          "indexId": "2:5683179251923251821",
+          "type": 6,
+          "flags": 8
         }
       ],
       "relations": []
     },
     {
       "id": "2:7922726385351882690",
-      "lastPropertyId": "8:1725148359479206162",
+      "lastPropertyId": "9:4471818019971680294",
       "name": "TableOverallStats",
       "properties": [
         {
@@ -56,9 +63,9 @@
         {
           "id": "2:6911105050596604463",
           "name": "tableNumber",
+          "indexId": "1:3755971674110176557",
           "type": 6,
-          "flags": 8,
-          "indexId": "1:3755971674110176557"
+          "flags": 8
         },
         {
           "id": "3:2819264881433091199",
@@ -89,13 +96,89 @@
           "id": "8:1725148359479206162",
           "name": "bestScoreTotal",
           "type": 6
+        },
+        {
+          "id": "9:4471818019971680294",
+          "name": "profileId",
+          "indexId": "3:4124145163981067127",
+          "type": 6,
+          "flags": 8
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4470930496338062207",
+      "lastPropertyId": "12:3428136180150778628",
+      "name": "Profile",
+      "properties": [
+        {
+          "id": "1:2335578195191466728",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7785617257182723182",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:1521294452936686705",
+          "name": "avatarKey",
+          "type": 9
+        },
+        {
+          "id": "4:5129256959924594972",
+          "name": "colorValue",
+          "type": 6
+        },
+        {
+          "id": "5:1121572789352371520",
+          "name": "goalDailySessions",
+          "type": 6
+        },
+        {
+          "id": "6:2305840851973078994",
+          "name": "goalWeeklySessions",
+          "type": 6
+        },
+        {
+          "id": "7:6572257232195120939",
+          "name": "favoriteTablesSerialized",
+          "type": 9
+        },
+        {
+          "id": "8:5304487426129844266",
+          "name": "isArchived",
+          "type": 1
+        },
+        {
+          "id": "9:3720467648065235627",
+          "name": "archivedAt",
+          "type": 10
+        },
+        {
+          "id": "10:5649766311174442914",
+          "name": "createdAt",
+          "type": 10
+        },
+        {
+          "id": "11:7149908717768481576",
+          "name": "updatedAt",
+          "type": 10
+        },
+        {
+          "id": "12:3428136180150778628",
+          "name": "favoriteTables",
+          "type": 27
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:7922726385351882690",
-  "lastIndexId": "1:3755971674110176557",
+  "lastEntityId": "3:4470930496338062207",
+  "lastIndexId": "3:4124145163981067127",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

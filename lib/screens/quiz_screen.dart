@@ -4,9 +4,10 @@ import 'package:provider/provider.dart';
 
 import 'package:multy_app/l10n/app_localizations.dart';
 import 'package:multy_app/configs/route_paths.dart';
+import 'package:multy_app/providers/profile_provider.dart';
+import 'package:multy_app/providers/quiz_attemp_provider.dart';
 import 'package:multy_app/providers/quiz_notifier.dart';
-import 'package:multy_app/utils/vibrate.dart';
-import 'package:multy_app/utils/player.dart';
+import 'package:multy_app/services/feedback_service.dart';
 
 import 'package:multy_app/widgets/quiz/question_card.dart';
 import 'package:multy_app/widgets/quiz/quiz_button.dart';
@@ -25,9 +26,6 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   bool _isNavigating = false; // Bandera para evitar navegación múltiple
 
-  // --- Instancia para el reproductor de audio ---
-  final Player _audioPlayer = Player();
-
   @override
   void initState() {
     super.initState();
@@ -35,8 +33,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   void dispose() {
-    // --- ¡Importante! Liberar recursos del reproductor ---
-    _audioPlayer.close();
     super.dispose();
   }
 
@@ -49,10 +45,54 @@ class _QuizScreenState extends State<QuizScreen> {
         quizNotifier.finalResult != null &&
         !_isNavigating) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _navigateToResultScreen(
-          quizNotifier.finalResult!,
-          quizNotifier.tableNumber,
-        );
+        _saveSessionAndNavigate(quizNotifier);
+      });
+    }
+  }
+
+  Future<void> _saveSessionAndNavigate(QuizNotifier quizNotifier) async {
+    final pendingAttempt = quizNotifier.pendingAttempt;
+    final baseResult = quizNotifier.finalResult;
+    if (pendingAttempt == null || baseResult == null) {
+      return;
+    }
+
+    try {
+      final profileProvider = context.read<ProfileProvider>();
+      final saveResult = await context.read<QuizAttempProvider>().saveQuizSession(
+        quizAttemp: pendingAttempt,
+        selectionMode: profileProvider.mode,
+        activeProfileId: profileProvider.activeProfile?.id,
+        activeProfileName: profileProvider.activeProfile?.name,
+      );
+
+      final resultForNavigation = baseResult.copyWith(
+        wasSaved: saveResult.wasSaved,
+        isGuestSession: saveResult.isGuestSession,
+        savedProfileName: saveResult.profileName,
+      );
+
+      if (!mounted) return;
+
+      await _navigateToResultScreen(
+        resultForNavigation,
+        quizNotifier.tableNumber,
+      );
+    } catch (_) {
+      if (!mounted) return;
+      final isSpanish = Localizations.localeOf(context).languageCode == 'es';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            isSpanish
+                ? 'No se pudo guardar este resultado.'
+                : 'Could not save this result.',
+          ),
+          backgroundColor: Colors.red.shade400,
+        ),
+      );
+      setState(() {
+        _isNavigating = false;
       });
     }
   }
@@ -128,20 +168,6 @@ class _QuizScreenState extends State<QuizScreen> {
         title: Text(l10n.quizScreenTitle(quizNotifier.tableNumber)),
         backgroundColor: Colors.deepPurpleAccent,
         foregroundColor: Colors.white,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: Center(
-              child: Text(
-                '${l10n.quizTimeLabel}: ${quizNotifier.remainingSeconds} s',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ],
         automaticallyImplyLeading: quizNotifier.quizFinished,
       ),
       body: PopScope(
@@ -158,34 +184,35 @@ class _QuizScreenState extends State<QuizScreen> {
           }
         },
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.fromLTRB(18, 18, 18, 20),
           // Muestra el quiz si no ha terminado
           child: !quizNotifier.quizFinished
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      l10n.quizQuestionProgress(
+                    _QuizStatusPanel(
+                      progressLabel: l10n.quizQuestionProgress(
                         quizNotifier.currentQuestionIndex + 1,
-                        quizNotifier.questions.length,
+                        quizNotifier.totalQuizQuestions,
                       ),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey.shade700,
-                      ),
+                      remainingSeconds: quizNotifier.remainingSeconds,
+                      progressValue:
+                          quizNotifier.totalQuizQuestions == 0
+                              ? 0
+                              : (quizNotifier.currentQuestionIndex + 1) /
+                                  quizNotifier.totalQuizQuestions,
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 18),
                     QuestionCard(
                       question: currentQuestion?.questionText ?? '...',
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 18),
                     Expanded(
                       child: GridView.count(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 15,
-                        mainAxisSpacing: 15,
-                        childAspectRatio: 2.0,
+                        crossAxisSpacing: 14,
+                        mainAxisSpacing: 14,
+                        childAspectRatio: 1.55,
                         children: (currentQuestion?.options ?? []).map((
                           option,
                         ) {
@@ -195,15 +222,13 @@ class _QuizScreenState extends State<QuizScreen> {
                                 context.read<QuizNotifier>().handleAnswer(
                                   option,
                                   () {
-                                    Vibrate.vibrate(correct: true);
-                                    _audioPlayer.playSound(
-                                      'sounds/correct-choice.mp3',
+                                    FeedbackService.instance.playAnswerFeedback(
+                                      correct: true,
                                     );
                                   },
                                   () {
-                                    Vibrate.vibrate(correct: false);
-                                    _audioPlayer.playSound(
-                                      'sounds/error-choice.mp3',
+                                    FeedbackService.instance.playAnswerFeedback(
+                                      correct: false,
                                     );
                                   },
                                 );
@@ -219,6 +244,124 @@ class _QuizScreenState extends State<QuizScreen> {
               // Muestra un indicador si ya terminó pero aún no navega (estado intermedio)
               : const Center(child: CircularProgressIndicator()),
         ),
+      ),
+    );
+  }
+}
+
+class _QuizStatusPanel extends StatelessWidget {
+  const _QuizStatusPanel({
+    required this.progressLabel,
+    required this.remainingSeconds,
+    required this.progressValue,
+  });
+
+  final String progressLabel;
+  final int remainingSeconds;
+  final double progressValue;
+
+  @override
+  Widget build(BuildContext context) {
+    final warning = remainingSeconds <= 10;
+    final timerColor = warning
+        ? const Color(0xFFE65100)
+        : const Color(0xFF5E35B1);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: <Color>[Color(0xFFF5F0FF), Color(0xFFE6F3FF)],
+        ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.deepPurple.withValues(alpha: 0.08),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: _QuizInfoChip(
+                  icon: Icons.flag_rounded,
+                  label: progressLabel,
+                  backgroundColor: Colors.white.withValues(alpha: 0.88),
+                  foregroundColor: const Color(0xFF4527A0),
+                ),
+              ),
+              const SizedBox(width: 12),
+              _QuizInfoChip(
+                icon: Icons.timer_outlined,
+                label: '$remainingSeconds s',
+                backgroundColor: timerColor.withValues(alpha: 0.14),
+                foregroundColor: timerColor,
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(999),
+            child: LinearProgressIndicator(
+              value: progressValue.clamp(0, 1),
+              minHeight: 12,
+              backgroundColor: Colors.white.withValues(alpha: 0.72),
+              valueColor: AlwaysStoppedAnimation<Color>(
+                warning ? const Color(0xFFFF8A3D) : const Color(0xFF6C63FF),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QuizInfoChip extends StatelessWidget {
+  const _QuizInfoChip({
+    required this.icon,
+    required this.label,
+    required this.backgroundColor,
+    required this.foregroundColor,
+  });
+
+  final IconData icon;
+  final String label;
+  final Color backgroundColor;
+  final Color foregroundColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 18, color: foregroundColor),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              label,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w800,
+                color: foregroundColor,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

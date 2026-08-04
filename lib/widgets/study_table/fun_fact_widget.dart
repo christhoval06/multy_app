@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:multy_app/l10n/app_localizations.dart';
-
 import 'package:multy_app/utils/fun_facts.dart';
 
 class FunFactWidget extends StatelessWidget {
@@ -15,45 +14,59 @@ class FunFactWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!; // Para textos localizados
-    String? fact = FunFacts.getFunFact(
-      table,
-      multiplier,
-      l10n,
-    ); // Necesitarías una función que devuelva hechos
+    final l10n = AppLocalizations.of(context)!;
+    final colorScheme = Theme.of(context).colorScheme;
+    final fact = FunFacts.getFunFact(table, multiplier, l10n);
 
-    if (fact == null) return const SizedBox(height: 60);
+    if (fact == null) {
+      return const SizedBox(height: 84);
+    }
 
     return Container(
-      height: 60, // Altura fija para el contenedor del hecho divertido
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      // margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0), // Se maneja con el Padding exterior
-      child: Center(
-        // Para centrar el Row si el texto es corto
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize
-              .min, // Para que el Row no ocupe todo el ancho si el texto es corto
-          children: [
-            const Text("💡", style: TextStyle(fontSize: 18)),
-            const SizedBox(width: 8),
-            Flexible(
-              // Flexible para que el texto se ajuste
-              child: Text(
-                fact,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  fontStyle: FontStyle.italic,
-                ),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis, // Por si el texto es muy largo
-                maxLines: 2,
-              ),
+      key: const Key('study-fact-card'),
+      constraints: const BoxConstraints(minHeight: 84),
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.68),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.55)),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.primary.withValues(alpha: 0.08),
+            blurRadius: 16,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: colorScheme.secondary.withValues(alpha: 0.16),
+              borderRadius: BorderRadius.circular(14),
             ),
-          ],
-        ),
+            child: const Center(
+              child: Text('💡', style: TextStyle(fontSize: 20)),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              fact,
+              style: TextStyle(
+                fontSize: 14,
+                color: colorScheme.onSurfaceVariant,
+                fontStyle: FontStyle.italic,
+                height: 1.25,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
       ),
     );
   }

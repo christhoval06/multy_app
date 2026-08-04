@@ -3,6 +3,38 @@
   "appTitle": "Tablas de Multiplicar",
   "selectTableTitle": "Selecciona una opción",
   "selectTablePrompt": "¿Qué tabla quieres practicar hoy?",
+  "selectStudyTableTitle": "Elige una tabla para estudiar",
+  "@selectStudyTableTitle": {
+    "description": "Título mostrado en la pantalla de selección de tablas cuando el usuario va a entrar al modo estudio."
+  },
+  "selectStudyTablePrompt": "Escoge una tabla y explórala paso a paso a tu propio ritmo.",
+  "@selectStudyTablePrompt": {
+    "description": "Mensaje principal mostrado en la pantalla de selección de tablas para el modo estudio."
+  },
+  "selectStudyTableHelper": "Repasa patrones, repite operaciones y gana confianza antes del quiz.",
+  "@selectStudyTableHelper": {
+    "description": "Texto de apoyo mostrado en el hero del modo estudio en la pantalla de selección de tablas."
+  },
+  "selectQuizTableTitle": "Elige una tabla para tu quiz",
+  "@selectQuizTableTitle": {
+    "description": "Título mostrado en la pantalla de selección de tablas cuando el usuario va a entrar al modo quiz."
+  },
+  "selectQuizTablePrompt": "Escoge una tabla y pon a prueba tu rapidez con un reto corto.",
+  "@selectQuizTablePrompt": {
+    "description": "Mensaje principal mostrado en la pantalla de selección de tablas para el modo quiz."
+  },
+  "selectQuizTableHelper": "Responderás preguntas rápidas y verás tu puntaje al instante.",
+  "@selectQuizTableHelper": {
+    "description": "Texto de apoyo mostrado en el hero del modo quiz en la pantalla de selección de tablas."
+  },
+  "tableCardStudyLabel": "Modo estudio",
+  "@tableCardStudyLabel": {
+    "description": "Etiqueta corta mostrada dentro de una tarjeta de tabla cuando la pantalla está en modo estudio."
+  },
+  "tableCardQuizLabel": "Modo quiz",
+  "@tableCardQuizLabel": {
+    "description": "Etiqueta corta mostrada dentro de una tarjeta de tabla cuando la pantalla está en modo quiz."
+  },
   "practiceButton": "¡Practicar!",
   "practiceScreenTitle": "Practicando la Tabla del {tableNumber}",
   "multiplicationOperation": "{factor1} x {factor2} = ",
@@ -35,6 +67,12 @@
   "quizPercentageDetailed": "Eso es un {percentage}% de acierto.",
   "quizMainMenuButton": "Menú Principal",
   "quizResultTimedOutInfo": "Se acabó el tiempo en esta ocasión.",
+  "quizResultCorrectLabel": "Correctas",
+  "quizResultTimeLabel": "Tiempo",
+  "quizResultBestTimeLabel": "Mejor tiempo",
+  "quizResultNewRecord": "Nuevo récord",
+  "quizResultKeepGoing": "¡Sigue así!",
+  "quizResultRetryHint": "Intenta superar tu mejor tiempo",
   "statisticsTitle": "Mi Progreso",
   "overallStats": "Estadísticas Generales",
   "totalQuizzesPlayed": "Total de Quizzes Jugados: {count}",
@@ -58,6 +96,70 @@
   "noAttemptsYet": "Aún no hay intentos para esta tabla.",
   "noStatsAvailable": "Aún no hay estadísticas disponibles. ¡Juega algunos quizzes!",
   "loadingStats": "Cargando estadísticas...",
+  "statsForProfile": "Mostrando el progreso de {name}",
+  "@statsForProfile": {
+    "description": "Subtítulo mostrado en la pantalla de estadísticas cuando hay un perfil persistente activo.",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "statsGuestTitle": "Sesión de invitado",
+  "@statsGuestTitle": {
+    "description": "Título mostrado en la pantalla de estadísticas cuando está seleccionado el perfil invitado."
+  },
+  "statsGuestSubtitle": "Las sesiones de invitado no se guardan, así que todavía no hay historial.",
+  "@statsGuestSubtitle": {
+    "description": "Explicación mostrada en la pantalla de estadísticas para el modo invitado."
+  },
+  "statsNoProfileTitle": "No hay perfil seleccionado",
+  "@statsNoProfileTitle": {
+    "description": "Título mostrado en la pantalla de estadísticas cuando aún no se ha seleccionado un perfil."
+  },
+  "statsNoProfileSubtitle": "Elige un perfil en inicio para ver el progreso guardado.",
+  "@statsNoProfileSubtitle": {
+    "description": "Mensaje mostrado en la pantalla de estadísticas cuando no hay una selección de perfil activa."
+  },
+  "sessionHistoryTitle": "Historial de sesiones",
+  "@sessionHistoryTitle": {
+    "description": "Encabezado de la sección de historial por sesión en la pantalla de estadísticas."
+  },
+  "sessionHistorySubtitle": "Tus quizzes más recientes para este perfil.",
+  "@sessionHistorySubtitle": {
+    "description": "Breve explicación para la sección de historial por sesión."
+  },
+  "sessionHistoryEmpty": "Todavía no hay sesiones guardadas para este perfil.",
+  "@sessionHistoryEmpty": {
+    "description": "Mensaje vacío cuando un perfil persistente todavía no tiene historial guardado."
+  },
+  "sessionHistoryScore": "Puntaje {correct}/{total}",
+  "@sessionHistoryScore": {
+    "description": "Etiqueta de puntaje para una entrada individual del historial.",
+    "placeholders": {
+      "correct": {},
+      "total": {}
+    }
+  },
+  "sessionHistoryAccuracy": "Precisión {accuracy}%",
+  "@sessionHistoryAccuracy": {
+    "description": "Etiqueta de precisión para una entrada individual del historial.",
+    "placeholders": {
+      "accuracy": {}
+    }
+  },
+  "sessionHistoryShowAll": "Ver los {count} quizzes",
+  "@sessionHistoryShowAll": {
+    "description": "Etiqueta del botón para expandir el historial de sesiones y mostrar todos los quizzes guardados.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "sessionHistoryShowLess": "Ver menos",
+  "@sessionHistoryShowLess": {
+    "description": "Etiqueta del botón para volver a compactar el historial de sesiones."
+  },
   "bestTime": "Mejor Tiempo: {time}",
   "@bestTime": {
     "placeholders": {
@@ -91,6 +193,15 @@
   "settingsIncorrectConfirmationText": "Texto de confirmación incorrecto.",
   "settingsAllDataDeleted": "Todos los datos han sido borrados.",
   "settingsSectionAppInfo": "Información de la App",
+  "settingsSectionFeedback": "Sonido y vibración",
+  "settingsSoundTitle": "Sonidos",
+  "settingsSoundSubtitle": "Reproduce sonidos cortos al elegir perfiles y mostrar resultados.",
+  "settingsSoundOn": "Sonido activo",
+  "settingsSoundOff": "Sonido apagado",
+  "settingsVibrationTitle": "Vibración",
+  "settingsVibrationSubtitle": "Usa vibración suave para selecciones y resultados.",
+  "settingsVibrationOn": "Vibración activa",
+  "settingsVibrationOff": "Vibración apagada",
   "settingsAppVersion": "Versión de la App",
   "settingsTermsAndConditions": "Términos y Condiciones",
   "settingsPrivacyPolicy": "Política de Privacidad",
@@ -106,7 +217,59 @@
   "settingsContactDeveloper": "Contactar",
   "settingsSectionSupport": "Soporte",
   "settingsReportProblem": "Reportar un Problema",
+  "settingsSupportSubtitle": "Enviar comentarios o reportar un problema.",
+  "settingsSectionProfiles": "Perfiles",
+  "settingsSectionTiming": "Tiempo de práctica",
+  "settingsStudyTimerTitle": "Velocidad de tarjetas",
+  "settingsStudyTimerSubtitle": "Elige cada cuánto avanzan automáticamente las tarjetas de estudio.",
+  "settingsQuizTimerTitle": "Tiempo del quiz",
+  "settingsQuizTimerSubtitle": "Define cuánto tiempo tiene cada quiz antes de terminar.",
+  "settingsRestoreTimerDefaultsTitle": "Restaurar tiempos por defecto",
+  "settingsRestoreTimerDefaultsSubtitle": "Volver a 5s para estudio y 50s para los quizzes.",
+  "settingsChooseTimerValue": "Elige un tiempo",
   "settingsSectionDataManagement": "Gestión de Datos",
+  "settingsManageProfilesTitle": "Gestionar perfiles",
+  "@settingsManageProfilesTitle": {
+    "description": "Titulo de la opcion de configuracion que abre la gestion de perfiles"
+  },
+  "settingsManageProfilesSubtitle": "Crear, editar, archivar o borrar perfiles de estudio.",
+  "@settingsManageProfilesSubtitle": {
+    "description": "Subtitulo de la opcion de configuracion para gestionar perfiles"
+  },
+  "settingsProfilesSummary": "{count} perfiles guardados en este dispositivo.",
+  "@settingsProfilesSummary": {
+    "description": "Linea de resumen en configuracion con la cantidad total de perfiles guardados.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "settingsProfilesActiveSummary": "Perfil activo: {name}",
+  "@settingsProfilesActiveSummary": {
+    "description": "Linea de resumen en configuracion con el nombre del perfil activo.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Mateo"
+      }
+    }
+  },
+  "settingsOverviewProfiles": "{count} perfiles",
+  "@settingsOverviewProfiles": {
+    "description": "Etiqueta corta en la tarjeta superior de configuracion con la cantidad de perfiles.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "settingsDeleteProgressSubtitle": "Elimina todos los intentos de quiz y las estadisticas.",
+  "@settingsDeleteProgressSubtitle": {
+    "description": "Subtitulo de la accion destructiva que limpia el progreso de quiz"
+  },
   "settingsDeleteAllDataTitle": "Borrar Todos los Datos",
   "settingsDeleteAllDataSubtitle": "Elimina todas las rifas, números y compradores.",
 
@@ -196,5 +359,203 @@
   "onboardingSlide3Title": "Rompe tus propios records",
   "onboardingSlide3Description": "Sigue tu progreso, celebra tus logros y conquista cada tabla como un campeon.",
 
-  "homeGreeting": "¿Qué deseas hacer hoy?"
+  "homeGreeting": "¿Qué deseas hacer hoy?",
+  "homeProfileSelectorTitle": "Elige quién va a estudiar",
+  "@homeProfileSelectorTitle": {
+    "description": "Titulo mostrado arriba del selector de perfiles en home"
+  },
+  "homeProfileSelectorSubtitle": "Selecciona un perfil antes de empezar a estudiar o hacer un quiz.",
+  "@homeProfileSelectorSubtitle": {
+    "description": "Texto de ayuda mostrado debajo del titulo del selector de perfiles en home"
+  },
+  "homeProfileGuestLabel": "Invitado",
+  "@homeProfileGuestLabel": {
+    "description": "Etiqueta de la opcion temporal de invitado en el selector de perfiles del home"
+  },
+  "homeProfileSelectionRequired": "Selecciona un perfil para continuar",
+  "@homeProfileSelectionRequired": {
+    "description": "Mensaje mostrado en home cuando aun no se ha seleccionado un perfil"
+  },
+  "homeProfileActiveSummary": "Estudiará {name}",
+  "@homeProfileActiveSummary": {
+    "description": "Resumen mostrado en home cuando hay un perfil persistente seleccionado",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Mateo"
+      }
+    }
+  },
+  "homeProfileGuestSummary": "Modo invitado activo",
+  "@homeProfileGuestSummary": {
+    "description": "Resumen mostrado en home cuando la seleccion activa es invitado"
+  },
+  "homeProfileGuestHelper": "Ideal para una práctica rápida sin guardar historial.",
+  "@homeProfileGuestHelper": {
+    "description": "Texto de ayuda mostrado para el modo invitado en home"
+  },
+  "homeProfileActiveHelper": "El progreso y el historial se guardarán solo para este perfil.",
+  "@homeProfileActiveHelper": {
+    "description": "Texto de ayuda mostrado cuando un perfil persistente esta activo en home"
+  },
+  "homeProfileNoSelectionHelper": "Elige un perfil o entra como invitado para empezar.",
+  "@homeProfileNoSelectionHelper": {
+    "description": "Texto de ayuda mostrado en home cuando no hay perfil seleccionado"
+  },
+  "profileManagementTitle": "Perfiles",
+  "@profileManagementTitle": {
+    "description": "Titulo de la pantalla de gestion de perfiles"
+  },
+  "profileManagementSubtitle": "Configura los perfiles que pueden estudiar en este dispositivo.",
+  "@profileManagementSubtitle": {
+    "description": "Texto de ayuda superior en la pantalla de gestion de perfiles"
+  },
+  "profileManagementCreateAction": "Crear perfil",
+  "@profileManagementCreateAction": {
+    "description": "Accion principal para crear un nuevo perfil"
+  },
+  "profileManagementEditAction": "Editar",
+  "@profileManagementEditAction": {
+    "description": "Etiqueta de accion para editar un perfil"
+  },
+  "profileManagementArchiveAction": "Archivar",
+  "@profileManagementArchiveAction": {
+    "description": "Etiqueta de accion para archivar un perfil"
+  },
+  "profileManagementDeleteAction": "Borrar",
+  "@profileManagementDeleteAction": {
+    "description": "Etiqueta de accion para borrar un perfil"
+  },
+  "profileManagementProfileSummary": "Perfil persistente con progreso e historial separados.",
+  "@profileManagementProfileSummary": {
+    "description": "Descripcion corta mostrada debajo del nombre del perfil en gestion"
+  },
+  "profileManagementArchivedSummary": "Perfil archivado. Ya no aparece en el selector del inicio.",
+  "@profileManagementArchivedSummary": {
+    "description": "Descripcion mostrada para perfiles archivados en la gestion"
+  },
+  "profileManagementMaxProfiles": "Puedes tener hasta {count} perfiles guardados.",
+  "@profileManagementMaxProfiles": {
+    "description": "Mensaje mostrado cuando se alcanzo el limite de perfiles",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "profileManagementSavedCount": "{current} de {max} perfiles guardados",
+  "@profileManagementSavedCount": {
+    "description": "Resumen superior con la cantidad de perfiles guardados",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "2"
+      },
+      "max": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "profileManagementGuestHint": "Invitado siempre estará disponible en el inicio para sesiones temporales.",
+  "@profileManagementGuestHint": {
+    "description": "Texto de ayuda sobre el modo invitado en la pantalla de perfiles"
+  },
+  "profileManagementActiveBadge": "Activo",
+  "@profileManagementActiveBadge": {
+    "description": "Etiqueta mostrada sobre el perfil activo en la gestion de perfiles"
+  },
+  "profileManagementArchivedBadge": "Archivado",
+  "@profileManagementArchivedBadge": {
+    "description": "Etiqueta mostrada sobre perfiles archivados en la gestion de perfiles"
+  },
+  "profileManagementArchiveTitle": "¿Archivar perfil?",
+  "@profileManagementArchiveTitle": {
+    "description": "Titulo del dialogo de confirmacion para archivar un perfil"
+  },
+  "profileManagementArchiveMessage": "El perfil {name} dejará de aparecer en el selector del inicio.",
+  "@profileManagementArchiveMessage": {
+    "description": "Mensaje de confirmacion para archivar un perfil",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Mateo"
+      }
+    }
+  },
+  "profileManagementDeleteTitle": "¿Borrar perfil?",
+  "@profileManagementDeleteTitle": {
+    "description": "Titulo del dialogo de confirmacion para borrar un perfil"
+  },
+  "profileManagementDeleteMessage": "El perfil {name} se eliminará de este dispositivo.",
+  "@profileManagementDeleteMessage": {
+    "description": "Mensaje de confirmacion para borrar un perfil",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Lucia"
+      }
+    }
+  },
+  "profileManagementCreateError": "No se pudo crear el perfil.",
+  "@profileManagementCreateError": {
+    "description": "Mensaje de error mostrado cuando falla la creacion del perfil"
+  },
+  "profileManagementEditError": "No se pudo actualizar el perfil.",
+  "@profileManagementEditError": {
+    "description": "Mensaje de error mostrado cuando falla la edicion del perfil"
+  },
+  "profileManagementArchiveError": "No se pudo archivar el perfil.",
+  "@profileManagementArchiveError": {
+    "description": "Mensaje de error mostrado cuando falla el archivado del perfil"
+  },
+  "profileManagementDeleteError": "No se pudo borrar el perfil.",
+  "@profileManagementDeleteError": {
+    "description": "Mensaje de error mostrado cuando falla el borrado del perfil"
+  },
+  "profileFormCreateTitle": "Crear perfil",
+  "@profileFormCreateTitle": {
+    "description": "Titulo de la hoja modal para crear un perfil"
+  },
+  "profileFormEditTitle": "Editar perfil",
+  "@profileFormEditTitle": {
+    "description": "Titulo de la hoja modal para editar un perfil"
+  },
+  "profileFormNameLabel": "Nombre",
+  "@profileFormNameLabel": {
+    "description": "Etiqueta del campo nombre del perfil"
+  },
+  "profileFormNameHint": "Ejemplo: Mateo",
+  "@profileFormNameHint": {
+    "description": "Texto de ayuda del campo nombre del perfil"
+  },
+  "profileFormNameRequired": "Ingresa un nombre para el perfil.",
+  "@profileFormNameRequired": {
+    "description": "Mensaje de validacion cuando el nombre del perfil esta vacio"
+  },
+  "profileFormAvatarLabel": "Avatar",
+  "@profileFormAvatarLabel": {
+    "description": "Etiqueta de la seccion de avatares en el formulario"
+  },
+  "profileFormColorLabel": "Color",
+  "@profileFormColorLabel": {
+    "description": "Etiqueta de la seccion de colores en el formulario"
+  },
+  "profileFormPreviewLabel": "Vista previa",
+  "@profileFormPreviewLabel": {
+    "description": "Titulo de la vista previa del perfil dentro del formulario"
+  },
+  "profileFormPreviewPlaceholder": "Tu perfil",
+  "@profileFormPreviewPlaceholder": {
+    "description": "Nombre temporal mostrado en la vista previa cuando el campo nombre esta vacio"
+  },
+  "profileFormCreateButton": "Guardar perfil",
+  "@profileFormCreateButton": {
+    "description": "Etiqueta del boton de envio al crear un perfil"
+  },
+  "profileFormSaveButton": "Guardar cambios",
+  "@profileFormSaveButton": {
+    "description": "Etiqueta del boton de envio al editar un perfil"
+  }
 }

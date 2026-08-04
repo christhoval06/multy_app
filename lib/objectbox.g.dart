@@ -14,6 +14,7 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'models/profile.dart';
 import 'models/quiz_attemp.dart';
 import 'models/table_overall_stats.dart';
 
@@ -23,7 +24,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
     id: const obx_int.IdUid(1, 4165570517916600519),
     name: 'QuizAttemp',
-    lastPropertyId: const obx_int.IdUid(6, 9122534839994369263),
+    lastPropertyId: const obx_int.IdUid(7, 2519481821383777361),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
@@ -62,6 +63,13 @@ final _entities = <obx_int.ModelEntity>[
         type: 6,
         flags: 0,
       ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 2519481821383777361),
+        name: 'profileId',
+        type: 6,
+        flags: 8,
+        indexId: const obx_int.IdUid(2, 5683179251923251821),
+      ),
     ],
     relations: <obx_int.ModelRelation>[],
     backlinks: <obx_int.ModelBacklink>[],
@@ -69,7 +77,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
     id: const obx_int.IdUid(2, 7922726385351882690),
     name: 'TableOverallStats',
-    lastPropertyId: const obx_int.IdUid(8, 1725148359479206162),
+    lastPropertyId: const obx_int.IdUid(9, 4471818019971680294),
     flags: 0,
     properties: <obx_int.ModelProperty>[
       obx_int.ModelProperty(
@@ -121,6 +129,95 @@ final _entities = <obx_int.ModelEntity>[
         type: 6,
         flags: 0,
       ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 4471818019971680294),
+        name: 'profileId',
+        type: 6,
+        flags: 8,
+        indexId: const obx_int.IdUid(3, 4124145163981067127),
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
+  obx_int.ModelEntity(
+    id: const obx_int.IdUid(3, 4470930496338062207),
+    name: 'Profile',
+    lastPropertyId: const obx_int.IdUid(12, 3428136180150778628),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 2335578195191466728),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 7785617257182723182),
+        name: 'name',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 1521294452936686705),
+        name: 'avatarKey',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 5129256959924594972),
+        name: 'colorValue',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 1121572789352371520),
+        name: 'goalDailySessions',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 2305840851973078994),
+        name: 'goalWeeklySessions',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 6572257232195120939),
+        name: 'favoriteTablesSerialized',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(8, 5304487426129844266),
+        name: 'isArchived',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 3720467648065235627),
+        name: 'archivedAt',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(10, 5649766311174442914),
+        name: 'createdAt',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(11, 7149908717768481576),
+        name: 'updatedAt',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(12, 3428136180150778628),
+        name: 'favoriteTables',
+        type: 27,
+        flags: 0,
+      ),
     ],
     relations: <obx_int.ModelRelation>[],
     backlinks: <obx_int.ModelBacklink>[],
@@ -164,9 +261,14 @@ Future<obx.Store> openStore({
 /// [obx.Store.new].
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
+    // If this version is not found, it means that this file was generated
+    // with an older version of the ObjectBox Dart generator.
+    // Please regenerate this file with the current generator version.
+    // Typically, this is done with `dart run build_runner build`.
+    generatorVersion: obx_int.GeneratorVersion.v2025_12_16,
     entities: _entities,
-    lastEntityId: const obx_int.IdUid(2, 7922726385351882690),
-    lastIndexId: const obx_int.IdUid(1, 3755971674110176557),
+    lastEntityId: const obx_int.IdUid(3, 4470930496338062207),
+    lastIndexId: const obx_int.IdUid(3, 4124145163981067127),
     lastRelationId: const obx_int.IdUid(0, 0),
     lastSequenceId: const obx_int.IdUid(0, 0),
     retiredEntityUids: const [],
@@ -188,13 +290,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
         object.id = id;
       },
       objectToFB: (QuizAttemp object, fb.Builder fbb) {
-        fbb.startTable(7);
+        fbb.startTable(8);
         fbb.addInt64(0, object.id);
         fbb.addInt64(1, object.timestamp.millisecondsSinceEpoch);
         fbb.addInt64(2, object.tableNumber);
         fbb.addInt64(3, object.correctAnswers);
         fbb.addInt64(4, object.totalQuestions);
         fbb.addInt64(5, object.durationInSeconds);
+        fbb.addInt64(6, object.profileId);
         fbb.finish(fbb.endTable());
         return object.id;
       },
@@ -209,6 +312,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
         );
         final timestampParam = DateTime.fromMillisecondsSinceEpoch(
           const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0),
+        );
+        final profileIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          16,
+          0,
         );
         final tableNumberParam = const fb.Int64Reader().vTableGet(
           buffer,
@@ -236,6 +345,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final object = QuizAttemp(
           id: idParam,
           timestamp: timestampParam,
+          profileId: profileIdParam,
           tableNumber: tableNumberParam,
           correctAnswers: correctAnswersParam,
           totalQuestions: totalQuestionsParam,
@@ -254,7 +364,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         object.id = id;
       },
       objectToFB: (TableOverallStats object, fb.Builder fbb) {
-        fbb.startTable(9);
+        fbb.startTable(10);
         fbb.addInt64(0, object.id);
         fbb.addInt64(1, object.tableNumber);
         fbb.addInt64(2, object.totalAttempts);
@@ -263,6 +373,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         fbb.addInt64(5, object.bestTimeInSeconds);
         fbb.addInt64(6, object.bestScoreCorrect);
         fbb.addInt64(7, object.bestScoreTotal);
+        fbb.addInt64(8, object.profileId);
         fbb.finish(fbb.endTable());
         return object.id;
       },
@@ -279,6 +390,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
           buffer,
           rootOffset,
           6,
+          0,
+        );
+        final profileIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          20,
           0,
         );
         final totalAttemptsParam = const fb.Int64Reader().vTableGet(
@@ -319,6 +436,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         final object = TableOverallStats(
           id: idParam,
           tableNumber: tableNumberParam,
+          profileId: profileIdParam,
           totalAttempts: totalAttemptsParam,
           totalCorrectAnswersSum: totalCorrectAnswersSumParam,
           totalQuestionsSum: totalQuestionsSumParam,
@@ -326,6 +444,115 @@ obx_int.ModelDefinition getObjectBoxModel() {
           bestScoreCorrect: bestScoreCorrectParam,
           bestScoreTotal: bestScoreTotalParam,
         );
+
+        return object;
+      },
+    ),
+    Profile: obx_int.EntityDefinition<Profile>(
+      model: _entities[2],
+      toOneRelations: (Profile object) => [],
+      toManyRelations: (Profile object) => {},
+      getId: (Profile object) => object.id,
+      setId: (Profile object, int id) {
+        object.id = id;
+      },
+      objectToFB: (Profile object, fb.Builder fbb) {
+        final nameOffset = fbb.writeString(object.name);
+        final avatarKeyOffset = fbb.writeString(object.avatarKey);
+        final favoriteTablesSerializedOffset = fbb.writeString(
+          object.favoriteTablesSerialized,
+        );
+        final favoriteTablesOffset = fbb.writeListInt64(object.favoriteTables);
+        fbb.startTable(13);
+        fbb.addInt64(0, object.id);
+        fbb.addOffset(1, nameOffset);
+        fbb.addOffset(2, avatarKeyOffset);
+        fbb.addInt64(3, object.colorValue);
+        fbb.addInt64(4, object.goalDailySessions);
+        fbb.addInt64(5, object.goalWeeklySessions);
+        fbb.addOffset(6, favoriteTablesSerializedOffset);
+        fbb.addBool(7, object.isArchived);
+        fbb.addInt64(8, object.archivedAt?.millisecondsSinceEpoch);
+        fbb.addInt64(9, object.createdAt.millisecondsSinceEpoch);
+        fbb.addInt64(10, object.updatedAt.millisecondsSinceEpoch);
+        fbb.addOffset(11, favoriteTablesOffset);
+        fbb.finish(fbb.endTable());
+        return object.id;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final archivedAtValue = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          20,
+        );
+        final idParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final nameParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final avatarKeyParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 8, '');
+        final colorValueParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          10,
+          0,
+        );
+        final goalDailySessionsParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          12,
+          0,
+        );
+        final goalWeeklySessionsParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          14,
+          0,
+        );
+        final favoriteTablesSerializedParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 16, '');
+        final isArchivedParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          18,
+          false,
+        );
+        final archivedAtParam = archivedAtValue == null
+            ? null
+            : DateTime.fromMillisecondsSinceEpoch(archivedAtValue);
+        final createdAtParam = DateTime.fromMillisecondsSinceEpoch(
+          const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0),
+        );
+        final updatedAtParam = DateTime.fromMillisecondsSinceEpoch(
+          const fb.Int64Reader().vTableGet(buffer, rootOffset, 24, 0),
+        );
+        final object =
+            Profile(
+                id: idParam,
+                name: nameParam,
+                avatarKey: avatarKeyParam,
+                colorValue: colorValueParam,
+                goalDailySessions: goalDailySessionsParam,
+                goalWeeklySessions: goalWeeklySessionsParam,
+                favoriteTablesSerialized: favoriteTablesSerializedParam,
+                isArchived: isArchivedParam,
+                archivedAt: archivedAtParam,
+                createdAt: createdAtParam,
+                updatedAt: updatedAtParam,
+              )
+              ..favoriteTables = const fb.ListReader<int>(
+                fb.Int64Reader(),
+                lazy: false,
+              ).vTableGet(buffer, rootOffset, 26, []);
 
         return object;
       },
@@ -365,6 +592,11 @@ class QuizAttemp_ {
   /// See [QuizAttemp.durationInSeconds].
   static final durationInSeconds = obx.QueryIntegerProperty<QuizAttemp>(
     _entities[0].properties[5],
+  );
+
+  /// See [QuizAttemp.profileId].
+  static final profileId = obx.QueryIntegerProperty<QuizAttemp>(
+    _entities[0].properties[6],
   );
 }
 
@@ -407,5 +639,73 @@ class TableOverallStats_ {
   /// See [TableOverallStats.bestScoreTotal].
   static final bestScoreTotal = obx.QueryIntegerProperty<TableOverallStats>(
     _entities[1].properties[7],
+  );
+
+  /// See [TableOverallStats.profileId].
+  static final profileId = obx.QueryIntegerProperty<TableOverallStats>(
+    _entities[1].properties[8],
+  );
+}
+
+/// [Profile] entity fields to define ObjectBox queries.
+class Profile_ {
+  /// See [Profile.id].
+  static final id = obx.QueryIntegerProperty<Profile>(
+    _entities[2].properties[0],
+  );
+
+  /// See [Profile.name].
+  static final name = obx.QueryStringProperty<Profile>(
+    _entities[2].properties[1],
+  );
+
+  /// See [Profile.avatarKey].
+  static final avatarKey = obx.QueryStringProperty<Profile>(
+    _entities[2].properties[2],
+  );
+
+  /// See [Profile.colorValue].
+  static final colorValue = obx.QueryIntegerProperty<Profile>(
+    _entities[2].properties[3],
+  );
+
+  /// See [Profile.goalDailySessions].
+  static final goalDailySessions = obx.QueryIntegerProperty<Profile>(
+    _entities[2].properties[4],
+  );
+
+  /// See [Profile.goalWeeklySessions].
+  static final goalWeeklySessions = obx.QueryIntegerProperty<Profile>(
+    _entities[2].properties[5],
+  );
+
+  /// See [Profile.favoriteTablesSerialized].
+  static final favoriteTablesSerialized = obx.QueryStringProperty<Profile>(
+    _entities[2].properties[6],
+  );
+
+  /// See [Profile.isArchived].
+  static final isArchived = obx.QueryBooleanProperty<Profile>(
+    _entities[2].properties[7],
+  );
+
+  /// See [Profile.archivedAt].
+  static final archivedAt = obx.QueryDateProperty<Profile>(
+    _entities[2].properties[8],
+  );
+
+  /// See [Profile.createdAt].
+  static final createdAt = obx.QueryDateProperty<Profile>(
+    _entities[2].properties[9],
+  );
+
+  /// See [Profile.updatedAt].
+  static final updatedAt = obx.QueryDateProperty<Profile>(
+    _entities[2].properties[10],
+  );
+
+  /// See [Profile.favoriteTables].
+  static final favoriteTables = obx.QueryIntegerVectorProperty<Profile>(
+    _entities[2].properties[11],
   );
 }

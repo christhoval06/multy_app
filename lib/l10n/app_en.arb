@@ -6,6 +6,38 @@
   },
   "selectTableTitle": "Select a option",
   "selectTablePrompt": "Which table do you want to practice today?",
+  "selectStudyTableTitle": "Choose a table to study",
+  "@selectStudyTableTitle": {
+    "description": "Title shown on the table selection screen when the user is about to enter study mode."
+  },
+  "selectStudyTablePrompt": "Pick a table and explore it step by step at your own pace.",
+  "@selectStudyTablePrompt": {
+    "description": "Main prompt shown on the table selection screen for study mode."
+  },
+  "selectStudyTableHelper": "Review patterns, repeat facts, and build confidence before the quiz.",
+  "@selectStudyTableHelper": {
+    "description": "Supporting helper copy shown in the study mode hero on the table selection screen."
+  },
+  "selectQuizTableTitle": "Choose a table for your quiz",
+  "@selectQuizTableTitle": {
+    "description": "Title shown on the table selection screen when the user is about to enter quiz mode."
+  },
+  "selectQuizTablePrompt": "Pick a table and test your speed with a quick challenge.",
+  "@selectQuizTablePrompt": {
+    "description": "Main prompt shown on the table selection screen for quiz mode."
+  },
+  "selectQuizTableHelper": "You will answer fast questions and see your score right away.",
+  "@selectQuizTableHelper": {
+    "description": "Supporting helper copy shown in the quiz mode hero on the table selection screen."
+  },
+  "tableCardStudyLabel": "Study mode",
+  "@tableCardStudyLabel": {
+    "description": "Short label shown inside a table card when the selection screen is in study mode."
+  },
+  "tableCardQuizLabel": "Quiz mode",
+  "@tableCardQuizLabel": {
+    "description": "Short label shown inside a table card when the selection screen is in quiz mode."
+  },
   "practiceButton": "Practice!",
   "practiceScreenTitle": "Practicing Table {tableNumber}",
   "@practiceScreenTitle": {
@@ -74,6 +106,12 @@
   "@quizPercentageDetailed": { "placeholders": { "percentage": {} } },
   "quizMainMenuButton": "Main Menu",
   "quizResultTimedOutInfo": "You ran out of time on this attempt.",
+  "quizResultCorrectLabel": "Correct",
+  "quizResultTimeLabel": "Time",
+  "quizResultBestTimeLabel": "Best time",
+  "quizResultNewRecord": "New record",
+  "quizResultKeepGoing": "Keep going!",
+  "quizResultRetryHint": "Beat your best time",
   "statisticsTitle": "My Progress",
   "overallStats": "Overall Statistics",
   "totalQuizzesPlayed": "Total Quizzes Played: {count}",
@@ -97,6 +135,70 @@
   "noAttemptsYet": "No attempts yet for this table.",
   "noStatsAvailable": "No statistics available yet. Play some quizzes!",
   "loadingStats": "Loading statistics...",
+  "statsForProfile": "Showing progress for {name}",
+  "@statsForProfile": {
+    "description": "Subtitle shown on the stats screen when a persistent profile is active.",
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "statsGuestTitle": "Guest session",
+  "@statsGuestTitle": {
+    "description": "Title shown on the stats screen when the guest profile is selected."
+  },
+  "statsGuestSubtitle": "Guest sessions are not saved, so there is no history yet.",
+  "@statsGuestSubtitle": {
+    "description": "Explanation shown on the stats screen for guest mode."
+  },
+  "statsNoProfileTitle": "No profile selected",
+  "@statsNoProfileTitle": {
+    "description": "Title shown on the stats screen when no profile has been selected yet."
+  },
+  "statsNoProfileSubtitle": "Choose a profile on the home screen to see saved progress.",
+  "@statsNoProfileSubtitle": {
+    "description": "Message shown on the stats screen when there is no active profile selection."
+  },
+  "sessionHistoryTitle": "Session History",
+  "@sessionHistoryTitle": {
+    "description": "Header for the per-profile session history section on the stats screen."
+  },
+  "sessionHistorySubtitle": "Your most recent quizzes for this profile.",
+  "@sessionHistorySubtitle": {
+    "description": "Short explanation for the per-profile session history section."
+  },
+  "sessionHistoryEmpty": "No saved sessions yet for this profile.",
+  "@sessionHistoryEmpty": {
+    "description": "Empty state message when a persistent profile has no saved history yet."
+  },
+  "sessionHistoryScore": "Score {correct}/{total}",
+  "@sessionHistoryScore": {
+    "description": "Score label for an individual quiz session entry.",
+    "placeholders": {
+      "correct": {},
+      "total": {}
+    }
+  },
+  "sessionHistoryAccuracy": "Accuracy {accuracy}%",
+  "@sessionHistoryAccuracy": {
+    "description": "Accuracy label for an individual quiz session entry.",
+    "placeholders": {
+      "accuracy": {}
+    }
+  },
+  "sessionHistoryShowAll": "Show all {count} quizzes",
+  "@sessionHistoryShowAll": {
+    "description": "Button label to expand the session history list and show every saved quiz.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "sessionHistoryShowLess": "Show less",
+  "@sessionHistoryShowLess": {
+    "description": "Button label to collapse the session history list back to the default preview."
+  },
   "bestTime": "Best Time: {time}",
   "@bestTime": {
     "placeholders": {
@@ -130,6 +232,15 @@
   "settingsIncorrectConfirmationText": "Incorrect confirmation text.",
   "settingsAllDataDeleted": "All data has been deleted.",
   "settingsSectionAppInfo": "App Information",
+  "settingsSectionFeedback": "Sound & vibration",
+  "settingsSoundTitle": "Sounds",
+  "settingsSoundSubtitle": "Play short sounds when selecting profiles and showing results.",
+  "settingsSoundOn": "Sound on",
+  "settingsSoundOff": "Sound off",
+  "settingsVibrationTitle": "Vibration",
+  "settingsVibrationSubtitle": "Use gentle vibration for selections and results.",
+  "settingsVibrationOn": "Vibration on",
+  "settingsVibrationOff": "Vibration off",
   "settingsAppVersion": "App Version",
   "settingsTermsAndConditions": "Terms and Conditions",
   "settingsPrivacyPolicy": "Privacy Policy",
@@ -145,7 +256,59 @@
   "settingsContactDeveloper": "Contact",
   "settingsSectionSupport": "Support",
   "settingsReportProblem": "Report a Problem",
+  "settingsSupportSubtitle": "Send feedback or report an issue.",
+  "settingsSectionProfiles": "Profiles",
+  "settingsSectionTiming": "Practice Timing",
+  "settingsStudyTimerTitle": "Study card speed",
+  "settingsStudyTimerSubtitle": "Choose how fast the study cards move automatically.",
+  "settingsQuizTimerTitle": "Quiz time limit",
+  "settingsQuizTimerSubtitle": "Set how much time each quiz gives before it ends.",
+  "settingsRestoreTimerDefaultsTitle": "Restore default timers",
+  "settingsRestoreTimerDefaultsSubtitle": "Back to 5s for study cards and 50s for quizzes.",
+  "settingsChooseTimerValue": "Choose a time",
   "settingsSectionDataManagement": "Data Management",
+  "settingsManageProfilesTitle": "Manage profiles",
+  "@settingsManageProfilesTitle": {
+    "description": "Settings entry title that opens the profile management screen"
+  },
+  "settingsManageProfilesSubtitle": "Create, edit, archive, or delete study profiles.",
+  "@settingsManageProfilesSubtitle": {
+    "description": "Settings entry subtitle describing profile management"
+  },
+  "settingsProfilesSummary": "{count} saved profiles on this device.",
+  "@settingsProfilesSummary": {
+    "description": "Summary line shown in settings with the total saved profiles count.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "settingsProfilesActiveSummary": "Active profile: {name}",
+  "@settingsProfilesActiveSummary": {
+    "description": "Summary line shown in settings with the currently active profile name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Mateo"
+      }
+    }
+  },
+  "settingsOverviewProfiles": "{count} profiles",
+  "@settingsOverviewProfiles": {
+    "description": "Short pill label in the settings overview card showing how many profiles exist.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "settingsDeleteProgressSubtitle": "Deletes all quiz attempts and statistics.",
+  "@settingsDeleteProgressSubtitle": {
+    "description": "Subtitle for the destructive action that clears quiz progress data"
+  },
   "settingsDeleteAllDataTitle": "Delete All Data",
   "settingsDeleteAllDataSubtitle": "Deletes all raffles, numbers, and buyers.",
 
@@ -235,5 +398,203 @@
   "onboardingSlide3Title": "Break your own records",
   "onboardingSlide3Description": "Track your progress, celebrate every win, and master each table like a champion.",
 
-  "homeGreeting": "What do you want to do today?"
+  "homeGreeting": "What do you want to do today?",
+  "homeProfileSelectorTitle": "Choose who is studying",
+  "@homeProfileSelectorTitle": {
+    "description": "Title shown above the home profile selector"
+  },
+  "homeProfileSelectorSubtitle": "Pick a profile before starting to study or take a quiz.",
+  "@homeProfileSelectorSubtitle": {
+    "description": "Helper text shown below the home profile selector title"
+  },
+  "homeProfileGuestLabel": "Guest",
+  "@homeProfileGuestLabel": {
+    "description": "Label for the temporary guest profile option on the home selector"
+  },
+  "homeProfileSelectionRequired": "Select a profile to continue",
+  "@homeProfileSelectionRequired": {
+    "description": "Message shown on home when no profile has been selected yet"
+  },
+  "homeProfileActiveSummary": "{name} will study",
+  "@homeProfileActiveSummary": {
+    "description": "Summary shown on home when a persistent profile is selected",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Mateo"
+      }
+    }
+  },
+  "homeProfileGuestSummary": "Guest mode is active",
+  "@homeProfileGuestSummary": {
+    "description": "Summary shown on home when guest mode is selected"
+  },
+  "homeProfileGuestHelper": "Great for a quick practice session without saving history.",
+  "@homeProfileGuestHelper": {
+    "description": "Helper text shown for guest mode on home"
+  },
+  "homeProfileActiveHelper": "Progress and history will be saved only for this profile.",
+  "@homeProfileActiveHelper": {
+    "description": "Helper text shown when a persistent profile is active on home"
+  },
+  "homeProfileNoSelectionHelper": "Choose a profile or enter as guest to get started.",
+  "@homeProfileNoSelectionHelper": {
+    "description": "Helper text shown when there is no active profile selection on home"
+  },
+  "profileManagementTitle": "Profiles",
+  "@profileManagementTitle": {
+    "description": "Title of the profile management screen"
+  },
+  "profileManagementSubtitle": "Set up the profiles that can study on this device.",
+  "@profileManagementSubtitle": {
+    "description": "Helper text at the top of the profile management screen"
+  },
+  "profileManagementCreateAction": "Create profile",
+  "@profileManagementCreateAction": {
+    "description": "Primary action label to create a new profile"
+  },
+  "profileManagementEditAction": "Edit",
+  "@profileManagementEditAction": {
+    "description": "Menu action label to edit a profile"
+  },
+  "profileManagementArchiveAction": "Archive",
+  "@profileManagementArchiveAction": {
+    "description": "Menu action label to archive a profile"
+  },
+  "profileManagementDeleteAction": "Delete",
+  "@profileManagementDeleteAction": {
+    "description": "Menu action label to delete a profile"
+  },
+  "profileManagementProfileSummary": "Persistent profile with separate progress and history.",
+  "@profileManagementProfileSummary": {
+    "description": "Short description shown under each profile name in the management screen"
+  },
+  "profileManagementArchivedSummary": "Archived profile. It no longer appears on the home selector.",
+  "@profileManagementArchivedSummary": {
+    "description": "Summary shown for archived profiles in the management screen"
+  },
+  "profileManagementMaxProfiles": "You can have up to {count} saved profiles.",
+  "@profileManagementMaxProfiles": {
+    "description": "Message shown when the profile limit has been reached",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "profileManagementSavedCount": "{current} of {max} saved profiles",
+  "@profileManagementSavedCount": {
+    "description": "Top summary with the number of saved profiles",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "2"
+      },
+      "max": {
+        "type": "int",
+        "example": "4"
+      }
+    }
+  },
+  "profileManagementGuestHint": "Guest will always be available on home for temporary sessions.",
+  "@profileManagementGuestHint": {
+    "description": "Helper text about guest mode on the profile management screen"
+  },
+  "profileManagementActiveBadge": "Active",
+  "@profileManagementActiveBadge": {
+    "description": "Badge shown on the active profile in profile management"
+  },
+  "profileManagementArchivedBadge": "Archived",
+  "@profileManagementArchivedBadge": {
+    "description": "Badge shown on archived profiles in profile management"
+  },
+  "profileManagementArchiveTitle": "Archive profile?",
+  "@profileManagementArchiveTitle": {
+    "description": "Confirmation dialog title for archiving a profile"
+  },
+  "profileManagementArchiveMessage": "The profile {name} will stop appearing on the home selector.",
+  "@profileManagementArchiveMessage": {
+    "description": "Confirmation message for archiving a profile",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Mateo"
+      }
+    }
+  },
+  "profileManagementDeleteTitle": "Delete profile?",
+  "@profileManagementDeleteTitle": {
+    "description": "Confirmation dialog title for deleting a profile"
+  },
+  "profileManagementDeleteMessage": "The profile {name} will be removed from the device.",
+  "@profileManagementDeleteMessage": {
+    "description": "Confirmation message for deleting a profile",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Lucia"
+      }
+    }
+  },
+  "profileManagementCreateError": "The profile could not be created.",
+  "@profileManagementCreateError": {
+    "description": "Error message shown when creating a profile fails"
+  },
+  "profileManagementEditError": "The profile could not be updated.",
+  "@profileManagementEditError": {
+    "description": "Error message shown when editing a profile fails"
+  },
+  "profileManagementArchiveError": "The profile could not be archived.",
+  "@profileManagementArchiveError": {
+    "description": "Error message shown when archiving a profile fails"
+  },
+  "profileManagementDeleteError": "The profile could not be deleted.",
+  "@profileManagementDeleteError": {
+    "description": "Error message shown when deleting a profile fails"
+  },
+  "profileFormCreateTitle": "Create profile",
+  "@profileFormCreateTitle": {
+    "description": "Title of the bottom sheet used to create a profile"
+  },
+  "profileFormEditTitle": "Edit profile",
+  "@profileFormEditTitle": {
+    "description": "Title of the bottom sheet used to edit a profile"
+  },
+  "profileFormNameLabel": "Name",
+  "@profileFormNameLabel": {
+    "description": "Label for the profile name field"
+  },
+  "profileFormNameHint": "Example: Mateo",
+  "@profileFormNameHint": {
+    "description": "Hint shown in the profile name field"
+  },
+  "profileFormNameRequired": "Enter a profile name.",
+  "@profileFormNameRequired": {
+    "description": "Validation message when the profile name field is empty"
+  },
+  "profileFormAvatarLabel": "Avatar",
+  "@profileFormAvatarLabel": {
+    "description": "Section label for avatar choices in the profile form"
+  },
+  "profileFormColorLabel": "Color",
+  "@profileFormColorLabel": {
+    "description": "Section label for color choices in the profile form"
+  },
+  "profileFormPreviewLabel": "Preview",
+  "@profileFormPreviewLabel": {
+    "description": "Title for the profile preview inside the form"
+  },
+  "profileFormPreviewPlaceholder": "Your profile",
+  "@profileFormPreviewPlaceholder": {
+    "description": "Temporary name shown in the preview when the name field is empty"
+  },
+  "profileFormCreateButton": "Save profile",
+  "@profileFormCreateButton": {
+    "description": "Submit button label when creating a profile"
+  },
+  "profileFormSaveButton": "Save changes",
+  "@profileFormSaveButton": {
+    "description": "Submit button label when editing a profile"
+  }
 }

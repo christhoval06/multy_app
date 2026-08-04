@@ -5,6 +5,7 @@ import 'package:multy_app/configs/route_paths.dart';
 import 'package:multy_app/l10n/app_localizations.dart';
 import 'package:multy_app/widgets/onboarding/onboarding_item.dart';
 import 'package:multy_app/widgets/onboarding/onboarding_page.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -15,7 +16,6 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  static const int _slideCount = 3;
   final PageController _pageController = PageController();
   double _currentPage = 0;
 
@@ -36,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _completeOnboarding() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = context.read<SharedPreferences>();
     await prefs.setBool(AppPrefs.onboardingComplete, true);
 
     if (mounted) {

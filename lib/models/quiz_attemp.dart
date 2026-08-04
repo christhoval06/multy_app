@@ -5,7 +5,10 @@ class QuizAttemp {
   @Id() // ID único para cada objeto, gestionado por ObjectBox
   int id = 0; // ObjectBox asignará un ID. 0 significa "no asignado aún".
 
+  @Property(type: PropertyType.date)
   DateTime timestamp;
+  @Index()
+  int profileId;
   int tableNumber; // El número de la tabla (ej: 2, 5, 10)
   int correctAnswers;
   int totalQuestions;
@@ -14,6 +17,7 @@ class QuizAttemp {
   QuizAttemp({
     this.id = 0,
     required this.timestamp,
+    required this.profileId,
     required this.tableNumber,
     required this.correctAnswers,
     required this.totalQuestions,

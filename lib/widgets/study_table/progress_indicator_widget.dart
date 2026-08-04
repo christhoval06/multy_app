@@ -4,27 +4,44 @@ class ProgressIndicatorWidget extends StatelessWidget {
   final int currentIndex;
   final int totalItems;
 
-  const ProgressIndicatorWidget({super.key, required this.currentIndex, required this.totalItems});
+  const ProgressIndicatorWidget({
+    super.key,
+    required this.currentIndex,
+    required this.totalItems,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Row(
+      key: const Key('study-progress-track'),
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(totalItems, (index) {
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 4.0),
-          width: 10.0,
-          height: 10.0,
+        final isActive = index == currentIndex;
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 220),
+          curve: Curves.easeOut,
+          margin: const EdgeInsets.symmetric(horizontal: 3),
+          width: isActive ? 24 : 10,
+          height: 10,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: index == currentIndex
-                ? Theme.of(context).primaryColor
-                : Colors.grey.shade300,
+            borderRadius: BorderRadius.circular(999),
+            color: isActive
+                ? colorScheme.primary
+                : colorScheme.primary.withValues(alpha: 0.18),
+            boxShadow: isActive
+                ? [
+                    BoxShadow(
+                      color: colorScheme.primary.withValues(alpha: 0.28),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ]
+                : null,
           ),
         );
       }),
     );
   }
-
 }

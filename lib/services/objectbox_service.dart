@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'package:multy_app/configs/app_prefs.dart';
+import 'package:multy_app/configs/settings.dart';
+import 'package:multy_app/models/profile.dart';
 import 'package:multy_app/models/table_overall_stats.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
@@ -6,6 +9,7 @@ import 'package:path/path.dart' as p;
 import 'package:multy_app/objectbox.g.dart'; // Will be generated
 
 import 'package:multy_app/models/quiz_attemp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ObjectBoxService {
   late final Store _store;
@@ -13,6 +17,8 @@ class ObjectBoxService {
   static final String dbName = 'multy_db';
 
   ObjectBoxService._create(this._store);
+  factory ObjectBoxService.forTest(Store store) =>
+      ObjectBoxService._create(store);
 
   static Future<ObjectBoxService> init() async {
     if (_instance == null) {
@@ -27,6 +33,12 @@ class ObjectBoxService {
   }
 
   static Future<void> clear() async {
+    final instance = _instance;
+    if (instance != null) {
+      instance._store.close();
+      _instance = null;
+    }
+
     final docsDir = await getApplicationDocumentsDirectory();
     final dbPath = p.join(docsDir.path, ObjectBoxService.dbName);
     final dbDirectory = Directory(dbPath);
@@ -40,9 +52,77 @@ class ObjectBoxService {
   Store get store => _store;
 
   // Optional: Add getters for boxes if you use them frequently
+  Box<Profile> get profileBox => _store.box<Profile>();
   Box<QuizAttemp> get quizAttempBox => _store.box<QuizAttemp>();
   Box<TableOverallStats> get tableOverallStats =>
       _store.box<TableOverallStats>();
+
+  Future<void> repairLegacyBestTimes({
+    required SharedPreferences prefs,
+  }) async {
+    if (prefs.getBool(AppPrefs.repairedLegacyBestTimesV1) ?? false) {
+      return;
+    }
+
+    final allAttempts = quizAttempBox.getAll();
+    final allStats = tableOverallStats.getAll();
+
+    final repairedAttempts = <QuizAttemp>[];
+    final attemptsByStatKey = <String, List<QuizAttemp>>{};
+
+    for (final attempt in allAttempts) {
+      final duration = attempt.durationInSeconds;
+      if (duration != null) {
+        attempt.durationInSeconds = _repairLegacyDuration(duration);
+        repairedAttempts.add(attempt);
+      }
+
+      attemptsByStatKey
+          .putIfAbsent(
+            _tableProfileKey(
+              profileId: attempt.profileId,
+              tableNumber: attempt.tableNumber,
+            ),
+            () => <QuizAttemp>[],
+          )
+          .add(attempt);
+    }
+
+    final repairedStats = <TableOverallStats>[];
+    for (final stats in allStats) {
+      final attempts =
+          attemptsByStatKey[_tableProfileKey(
+            profileId: stats.profileId,
+            tableNumber: stats.tableNumber,
+          )] ??
+          const <QuizAttemp>[];
+
+      final validDurations = attempts
+          .map((attempt) => attempt.durationInSeconds)
+          .whereType<int>()
+          .where(_isCompetitiveDuration)
+          .toList(growable: false);
+
+      stats.bestTimeInSeconds =
+          validDurations.isEmpty
+              ? null
+              : validDurations.reduce((best, current) {
+                return current < best ? current : best;
+              });
+      repairedStats.add(stats);
+    }
+
+    _store.runInTransaction(TxMode.write, () {
+      if (repairedAttempts.isNotEmpty) {
+        quizAttempBox.putMany(repairedAttempts);
+      }
+      if (repairedStats.isNotEmpty) {
+        tableOverallStats.putMany(repairedStats);
+      }
+    });
+
+    await prefs.setBool(AppPrefs.repairedLegacyBestTimesV1, true);
+  }
 
   Future<void> deleteAllData() async {
     // CUIDADO: Esto borra TODO.
@@ -56,6 +136,7 @@ class ObjectBoxService {
     _store.runInTransaction(TxMode.write, () {
       // Asegúrate de tener todas tus boxes aquí
       _store.box<QuizAttemp>().removeAll();
+      _store.box<TableOverallStats>().removeAll();
       // ... cualquier otra entidad que tengas ...
     });
     print("Todos los datos de ObjectBox han sido eliminados.");
@@ -69,5 +150,20 @@ class ObjectBoxService {
     // }
     // print("Archivo de base de datos eliminado. Necesitas reiniciar el servicio ObjectBox.");
     // // Luego tendrías que llamar a ObjectBoxService.init() de nuevo.
+  }
+
+  int _repairLegacyDuration(int durationInSeconds) {
+    return (Settings.quizTime - durationInSeconds).clamp(0, Settings.quizTime);
+  }
+
+  bool _isCompetitiveDuration(int durationInSeconds) {
+    return durationInSeconds > 0 && durationInSeconds < Settings.quizTime;
+  }
+
+  String _tableProfileKey({
+    required int profileId,
+    required int tableNumber,
+  }) {
+    return '$profileId:$tableNumber';
   }
 }

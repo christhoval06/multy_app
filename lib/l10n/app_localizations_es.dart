@@ -18,6 +18,30 @@ class AppLocalizationsEs extends AppLocalizations {
   String get selectTablePrompt => '¿Qué tabla quieres practicar hoy?';
 
   @override
+  String get selectStudyTableTitle => 'Elige una tabla para estudiar';
+
+  @override
+  String get selectStudyTablePrompt => 'Escoge una tabla y explórala paso a paso a tu propio ritmo.';
+
+  @override
+  String get selectStudyTableHelper => 'Repasa patrones, repite operaciones y gana confianza antes del quiz.';
+
+  @override
+  String get selectQuizTableTitle => 'Elige una tabla para tu quiz';
+
+  @override
+  String get selectQuizTablePrompt => 'Escoge una tabla y pon a prueba tu rapidez con un reto corto.';
+
+  @override
+  String get selectQuizTableHelper => 'Responderás preguntas rápidas y verás tu puntaje al instante.';
+
+  @override
+  String get tableCardStudyLabel => 'Modo estudio';
+
+  @override
+  String get tableCardQuizLabel => 'Modo quiz';
+
+  @override
   String get practiceButton => '¡Practicar!';
 
   @override
@@ -136,6 +160,24 @@ class AppLocalizationsEs extends AppLocalizations {
   String get quizResultTimedOutInfo => 'Se acabó el tiempo en esta ocasión.';
 
   @override
+  String get quizResultCorrectLabel => 'Correctas';
+
+  @override
+  String get quizResultTimeLabel => 'Tiempo';
+
+  @override
+  String get quizResultBestTimeLabel => 'Mejor tiempo';
+
+  @override
+  String get quizResultNewRecord => 'Nuevo récord';
+
+  @override
+  String get quizResultKeepGoing => '¡Sigue así!';
+
+  @override
+  String get quizResultRetryHint => 'Intenta superar tu mejor tiempo';
+
+  @override
   String get statisticsTitle => 'Mi Progreso';
 
   @override
@@ -182,6 +224,50 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get loadingStats => 'Cargando estadísticas...';
+
+  @override
+  String statsForProfile(Object name) {
+    return 'Mostrando el progreso de $name';
+  }
+
+  @override
+  String get statsGuestTitle => 'Sesión de invitado';
+
+  @override
+  String get statsGuestSubtitle => 'Las sesiones de invitado no se guardan, así que todavía no hay historial.';
+
+  @override
+  String get statsNoProfileTitle => 'No hay perfil seleccionado';
+
+  @override
+  String get statsNoProfileSubtitle => 'Elige un perfil en inicio para ver el progreso guardado.';
+
+  @override
+  String get sessionHistoryTitle => 'Historial de sesiones';
+
+  @override
+  String get sessionHistorySubtitle => 'Tus quizzes más recientes para este perfil.';
+
+  @override
+  String get sessionHistoryEmpty => 'Todavía no hay sesiones guardadas para este perfil.';
+
+  @override
+  String sessionHistoryScore(Object correct, Object total) {
+    return 'Puntaje $correct/$total';
+  }
+
+  @override
+  String sessionHistoryAccuracy(Object accuracy) {
+    return 'Precisión $accuracy%';
+  }
+
+  @override
+  String sessionHistoryShowAll(int count) {
+    return 'Ver los $count quizzes';
+  }
+
+  @override
+  String get sessionHistoryShowLess => 'Ver menos';
 
   @override
   String bestTime(String time) {
@@ -251,6 +337,33 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsSectionAppInfo => 'Información de la App';
 
   @override
+  String get settingsSectionFeedback => 'Sonido y vibración';
+
+  @override
+  String get settingsSoundTitle => 'Sonidos';
+
+  @override
+  String get settingsSoundSubtitle => 'Reproduce sonidos cortos al elegir perfiles y mostrar resultados.';
+
+  @override
+  String get settingsSoundOn => 'Sonido activo';
+
+  @override
+  String get settingsSoundOff => 'Sonido apagado';
+
+  @override
+  String get settingsVibrationTitle => 'Vibración';
+
+  @override
+  String get settingsVibrationSubtitle => 'Usa vibración suave para selecciones y resultados.';
+
+  @override
+  String get settingsVibrationOn => 'Vibración activa';
+
+  @override
+  String get settingsVibrationOff => 'Vibración apagada';
+
+  @override
   String get settingsAppVersion => 'Versión de la App';
 
   @override
@@ -296,7 +409,61 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsReportProblem => 'Reportar un Problema';
 
   @override
+  String get settingsSupportSubtitle => 'Enviar comentarios o reportar un problema.';
+
+  @override
+  String get settingsSectionProfiles => 'Perfiles';
+
+  @override
+  String get settingsSectionTiming => 'Tiempo de práctica';
+
+  @override
+  String get settingsStudyTimerTitle => 'Velocidad de tarjetas';
+
+  @override
+  String get settingsStudyTimerSubtitle => 'Elige cada cuánto avanzan automáticamente las tarjetas de estudio.';
+
+  @override
+  String get settingsQuizTimerTitle => 'Tiempo del quiz';
+
+  @override
+  String get settingsQuizTimerSubtitle => 'Define cuánto tiempo tiene cada quiz antes de terminar.';
+
+  @override
+  String get settingsRestoreTimerDefaultsTitle => 'Restaurar tiempos por defecto';
+
+  @override
+  String get settingsRestoreTimerDefaultsSubtitle => 'Volver a 5s para estudio y 50s para los quizzes.';
+
+  @override
+  String get settingsChooseTimerValue => 'Elige un tiempo';
+
+  @override
   String get settingsSectionDataManagement => 'Gestión de Datos';
+
+  @override
+  String get settingsManageProfilesTitle => 'Gestionar perfiles';
+
+  @override
+  String get settingsManageProfilesSubtitle => 'Crear, editar, archivar o borrar perfiles de estudio.';
+
+  @override
+  String settingsProfilesSummary(int count) {
+    return '$count perfiles guardados en este dispositivo.';
+  }
+
+  @override
+  String settingsProfilesActiveSummary(String name) {
+    return 'Perfil activo: $name';
+  }
+
+  @override
+  String settingsOverviewProfiles(int count) {
+    return '$count perfiles';
+  }
+
+  @override
+  String get settingsDeleteProgressSubtitle => 'Elimina todos los intentos de quiz y las estadisticas.';
 
   @override
   String get settingsDeleteAllDataTitle => 'Borrar Todos los Datos';
@@ -508,4 +675,137 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeGreeting => '¿Qué deseas hacer hoy?';
+
+  @override
+  String get homeProfileSelectorTitle => 'Elige quién va a estudiar';
+
+  @override
+  String get homeProfileSelectorSubtitle => 'Selecciona un perfil antes de empezar a estudiar o hacer un quiz.';
+
+  @override
+  String get homeProfileGuestLabel => 'Invitado';
+
+  @override
+  String get homeProfileSelectionRequired => 'Selecciona un perfil para continuar';
+
+  @override
+  String homeProfileActiveSummary(String name) {
+    return 'Estudiará $name';
+  }
+
+  @override
+  String get homeProfileGuestSummary => 'Modo invitado activo';
+
+  @override
+  String get homeProfileGuestHelper => 'Ideal para una práctica rápida sin guardar historial.';
+
+  @override
+  String get homeProfileActiveHelper => 'El progreso y el historial se guardarán solo para este perfil.';
+
+  @override
+  String get homeProfileNoSelectionHelper => 'Elige un perfil o entra como invitado para empezar.';
+
+  @override
+  String get profileManagementTitle => 'Perfiles';
+
+  @override
+  String get profileManagementSubtitle => 'Configura los perfiles que pueden estudiar en este dispositivo.';
+
+  @override
+  String get profileManagementCreateAction => 'Crear perfil';
+
+  @override
+  String get profileManagementEditAction => 'Editar';
+
+  @override
+  String get profileManagementArchiveAction => 'Archivar';
+
+  @override
+  String get profileManagementDeleteAction => 'Borrar';
+
+  @override
+  String get profileManagementProfileSummary => 'Perfil persistente con progreso e historial separados.';
+
+  @override
+  String get profileManagementArchivedSummary => 'Perfil archivado. Ya no aparece en el selector del inicio.';
+
+  @override
+  String profileManagementMaxProfiles(int count) {
+    return 'Puedes tener hasta $count perfiles guardados.';
+  }
+
+  @override
+  String profileManagementSavedCount(int current, int max) {
+    return '$current de $max perfiles guardados';
+  }
+
+  @override
+  String get profileManagementGuestHint => 'Invitado siempre estará disponible en el inicio para sesiones temporales.';
+
+  @override
+  String get profileManagementActiveBadge => 'Activo';
+
+  @override
+  String get profileManagementArchivedBadge => 'Archivado';
+
+  @override
+  String get profileManagementArchiveTitle => '¿Archivar perfil?';
+
+  @override
+  String profileManagementArchiveMessage(String name) {
+    return 'El perfil $name dejará de aparecer en el selector del inicio.';
+  }
+
+  @override
+  String get profileManagementDeleteTitle => '¿Borrar perfil?';
+
+  @override
+  String profileManagementDeleteMessage(String name) {
+    return 'El perfil $name se eliminará de este dispositivo.';
+  }
+
+  @override
+  String get profileManagementCreateError => 'No se pudo crear el perfil.';
+
+  @override
+  String get profileManagementEditError => 'No se pudo actualizar el perfil.';
+
+  @override
+  String get profileManagementArchiveError => 'No se pudo archivar el perfil.';
+
+  @override
+  String get profileManagementDeleteError => 'No se pudo borrar el perfil.';
+
+  @override
+  String get profileFormCreateTitle => 'Crear perfil';
+
+  @override
+  String get profileFormEditTitle => 'Editar perfil';
+
+  @override
+  String get profileFormNameLabel => 'Nombre';
+
+  @override
+  String get profileFormNameHint => 'Ejemplo: Mateo';
+
+  @override
+  String get profileFormNameRequired => 'Ingresa un nombre para el perfil.';
+
+  @override
+  String get profileFormAvatarLabel => 'Avatar';
+
+  @override
+  String get profileFormColorLabel => 'Color';
+
+  @override
+  String get profileFormPreviewLabel => 'Vista previa';
+
+  @override
+  String get profileFormPreviewPlaceholder => 'Tu perfil';
+
+  @override
+  String get profileFormCreateButton => 'Guardar perfil';
+
+  @override
+  String get profileFormSaveButton => 'Guardar cambios';
 }

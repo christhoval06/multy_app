@@ -5,12 +5,14 @@ import 'package:multy_app/providers/quiz_notifier.dart';
 import 'package:multy_app/screens/home_screen.dart';
 import 'package:multy_app/screens/onboarding_screen.dart';
 import 'package:multy_app/screens/practice_screen.dart';
+import 'package:multy_app/screens/profile_management_screen.dart';
 import 'package:multy_app/screens/quiz_result_screen.dart';
 import 'package:multy_app/screens/quiz_screen.dart';
 import 'package:multy_app/screens/settings_screen.dart';
 import 'package:multy_app/screens/stats_screen.dart';
 import 'package:multy_app/screens/study_table_screen.dart';
 import 'package:multy_app/screens/table_selection_screen.dart';
+import 'package:multy_app/services/timer_settings_service.dart';
 import 'package:provider/provider.dart';
 
 class Routes {
@@ -75,8 +77,11 @@ class Routes {
           return MaterialPageRoute(
             builder: (context) => ChangeNotifierProvider(
               // Crea una instancia de QuizNotifier, pasando el número de tabla
-              create: (_) =>
-                  QuizNotifier(context.read<QuizAttempProvider>(), arguments),
+              create: (_) => QuizNotifier(
+                context.read<QuizAttempProvider>(),
+                arguments,
+                timerSettingsService: context.read<TimerSettingsService>(),
+              ),
               // El child es la pantalla del Quiz, ya no necesita el argumento tableNumber
               child: const QuizScreen(),
             ),
@@ -117,6 +122,12 @@ class Routes {
       case RoutePaths.settings:
         return MaterialPageRoute(
           builder: (_) => SettingsScreen(),
+          settings: settings,
+        );
+
+      case RoutePaths.profileManagement:
+        return MaterialPageRoute(
+          builder: (_) => const ProfileManagementScreen(),
           settings: settings,
         );
 

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:multy_app/configs/app_prefs.dart';
 import 'package:multy_app/models/quiz_attemp.dart';
 import 'package:multy_app/models/table_overall_stats.dart';
-import 'package:multy_app/services/objectbox_service.dart';
 import 'package:multy_app/objectbox.g.dart';
+import 'package:multy_app/providers/profile_provider.dart';
+import 'package:multy_app/services/objectbox_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OverallStatsData {
   final int totalQuizzesPlayed;
@@ -32,84 +35,188 @@ class TableStatData {
   });
 }
 
+class QuizSessionSaveResult {
+  final bool wasSaved;
+  final bool isGuestSession;
+  final int? profileId;
+  final String? profileName;
+  final int? quizAttemptId;
+
+  const QuizSessionSaveResult({
+    required this.wasSaved,
+    required this.isGuestSession,
+    this.profileId,
+    this.profileName,
+    this.quizAttemptId,
+  });
+}
+
 class QuizAttempProvider extends ChangeNotifier {
   final Box<QuizAttemp> _quizAttempBox;
   final Box<TableOverallStats> _tableOverallStats;
-  final Store _store; // For transactions
+  final Store _store;
   ObjectBoxService objectboxService;
+  final SharedPreferences prefs;
 
-  QuizAttempProvider({required this.objectboxService})
+  QuizAttempProvider({required this.objectboxService, required this.prefs})
     : _store = objectboxService.store,
       _quizAttempBox = objectboxService.quizAttempBox,
       _tableOverallStats = objectboxService.tableOverallStats;
 
   Future<void> deleteAllData() async => objectboxService.deleteAllData();
 
-  Future<int> createQuizAttemp(QuizAttemp quizAttemp) async {
-    // if (raffle.endNumber < raffle.startNumber) {
-    //   throw ArgumentError(
-    //     'El número final no puede ser menor que el número inicial en la rifa.',
-    //   );
-    // }
-    // if ((raffle.endNumber - raffle.startNumber + 1) > 10000) {
-    //   // Mismo límite que en la UI
-    //   throw ArgumentError(
-    //     'El rango de números es demasiado grande para crear (máximo 10,000 números).',
-    //   );
-    // }
-
-    final quizAttempId = _quizAttempBox.put(quizAttemp);
-    return quizAttempId;
-  }
-
-  Future<List<QuizAttemp>> getAllQuizAttemp() async => _quizAttempBox.getAll();
-  Future<List<TableOverallStats>> getAllTableOverallStats() async =>
-      _tableOverallStats.getAll();
-
   OverallStatsData? _overallStats;
   OverallStatsData? get overallStats => _overallStats;
-  List<TableOverallStats> _allTableStats = []; // TablaN -> Sus stats
+
+  List<TableOverallStats> _allTableStats = [];
   List<TableOverallStats> get allTableStats => _allTableStats;
+
+  List<QuizAttemp> _sessionHistory = [];
+  List<QuizAttemp> get sessionHistory => _sessionHistory;
 
   final List<int> _tablesToDisplay = List.generate(12, (index) => index + 1);
   List<int> get tablesToDisplay => _tablesToDisplay;
 
+  Future<int> createQuizAttemp(QuizAttemp quizAttemp) async {
+    if (quizAttemp.profileId <= 0) {
+      throw ArgumentError(
+        'QuizAttemp requires a persisted profileId before saving.',
+      );
+    }
+
+    return _quizAttempBox.put(quizAttemp);
+  }
+
+  Future<List<QuizAttemp>> getAllQuizAttemp({int? profileId}) async {
+    if (profileId == null || profileId <= 0) {
+      return _quizAttempBox.getAll();
+    }
+
+    return _quizAttempBox
+        .query(QuizAttemp_.profileId.equals(profileId))
+        .build()
+        .find();
+  }
+
+  Future<List<TableOverallStats>> getAllTableOverallStats({
+    int? profileId,
+  }) async {
+    if (profileId == null || profileId <= 0) {
+      return _tableOverallStats.getAll();
+    }
+
+    return _tableOverallStats
+        .query(TableOverallStats_.profileId.equals(profileId))
+        .build()
+        .find();
+  }
+
+  Future<QuizSessionSaveResult> saveQuizSession({
+    required QuizAttemp quizAttemp,
+    ProfileSelectionMode? selectionMode,
+    int? activeProfileId,
+    String? activeProfileName,
+  }) async {
+    final selection =
+        selectionMode == null && activeProfileId == null && activeProfileName == null
+            ? await _resolveSelectionContext()
+            : _SelectionContext(mode: selectionMode ?? ProfileSelectionMode.none, profileId: activeProfileId);
+    final resolvedMode = selection.mode;
+    final resolvedProfileId = activeProfileId ?? selection.profileId;
+    final resolvedProfileName =
+        activeProfileName ??
+        (resolvedProfileId != null && resolvedProfileId > 0
+            ? _profileNameForId(resolvedProfileId)
+            : null);
+
+    if (resolvedMode == ProfileSelectionMode.guest) {
+      return const QuizSessionSaveResult(
+        wasSaved: false,
+        isGuestSession: true,
+      );
+    }
+
+    if (resolvedMode != ProfileSelectionMode.persistent) {
+      return const QuizSessionSaveResult(
+        wasSaved: false,
+        isGuestSession: false,
+      );
+    }
+
+    if (resolvedProfileId == null || resolvedProfileId <= 0) {
+      throw StateError(
+        'Persistent quiz sessions require an active persisted profile ID.',
+      );
+    }
+
+    quizAttemp.profileId = resolvedProfileId;
+    late final int quizAttempId;
+    _store.runInTransaction(TxMode.write, () {
+      quizAttempId = _quizAttempBox.put(quizAttemp);
+      _upsertTableOverallStats(quizAttemp);
+    });
+
+    return QuizSessionSaveResult(
+      wasSaved: true,
+      isGuestSession: false,
+      profileId: resolvedProfileId,
+      profileName: resolvedProfileName,
+      quizAttemptId: quizAttempId,
+    );
+  }
+
   Future<void> loadStatistics() async {
-    // Obtener todos los intentos de la base de datos
-    _allTableStats = await getAllTableOverallStats();
-    _allTableStats.sort(
-      (a, b) => a.tableNumber.compareTo(b.tableNumber),
-    ); // Ordenar por número de tabla
+    final selection = await _resolveSelectionContext();
+    await loadStatisticsForSelection(
+      selectionMode: selection.mode,
+      activeProfileId: selection.profileId,
+    );
+  }
 
-    // Calcular estadísticas generales a partir de las agregadas
-    int totalQuizzesPlayedOverall = 0;
-    double accuracyOverall = 0.0;
+  Future<void> loadStatisticsForSelection({
+    required ProfileSelectionMode selectionMode,
+    required int? activeProfileId,
+  }) async {
+    if (selectionMode != ProfileSelectionMode.persistent ||
+        activeProfileId == null ||
+        activeProfileId <= 0) {
+      _sessionHistory = <QuizAttemp>[];
+      _allTableStats = _buildDisplayStats(
+        scopedStats: const <TableOverallStats>[],
+        profileId: activeProfileId,
+      );
+      _overallStats = OverallStatsData(
+        totalQuizzesPlayed: 0,
+        overallAccuracy: 0.0,
+      );
+      notifyListeners();
+      return;
+    }
 
-    int totalCorrectSumGlobal = 0;
-    int totalQuestionsSumGlobal = 0;
+    _sessionHistory = await getAllQuizAttemp(profileId: activeProfileId);
+    _sessionHistory.sort((a, b) => b.timestamp.compareTo(a.timestamp));
 
-    for (var stat in _allTableStats) {
+    final scopedStats = await getAllTableOverallStats(profileId: activeProfileId)
+      ..sort((a, b) => a.tableNumber.compareTo(b.tableNumber));
+
+    var totalQuizzesPlayedOverall = 0;
+    var totalCorrectSumGlobal = 0;
+    var totalQuestionsSumGlobal = 0;
+
+    for (final stat in scopedStats) {
       totalQuizzesPlayedOverall += stat.totalAttempts;
       totalCorrectSumGlobal += stat.totalCorrectAnswersSum;
       totalQuestionsSumGlobal += stat.totalQuestionsSum;
     }
 
-    accuracyOverall = totalQuestionsSumGlobal > 0
+    final accuracyOverall = totalQuestionsSumGlobal > 0
         ? (totalCorrectSumGlobal / totalQuestionsSumGlobal) * 100
         : 0.0;
 
-    // Si una tabla no tiene entrada en _allTableStats, necesitamos crear un objeto placeholder
-    // para que se muestre en la UI con "No attempts yet"
-    List<TableOverallStats> displayStats = [];
-    for (int tableNum in _tablesToDisplay) {
-      TableOverallStats? foundStat = _allTableStats.firstWhere(
-        (s) => s.tableNumber == tableNum,
-        orElse: () => TableOverallStats(tableNumber: tableNum), // Placeholder
-      );
-      displayStats.add(foundStat);
-    }
-    _allTableStats = displayStats;
-
+    _allTableStats = _buildDisplayStats(
+      scopedStats: scopedStats,
+      profileId: activeProfileId,
+    );
     _overallStats = OverallStatsData(
       totalQuizzesPlayed: totalQuizzesPlayedOverall,
       overallAccuracy: accuracyOverall,
@@ -118,65 +225,113 @@ class QuizAttempProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateTableOverallStats(QuizAttemp newAttempt) {
-    final tableNum = newAttempt.tableNumber;
+  Future<void> updateTableOverallStats(QuizAttemp newAttempt) async {
+    if (newAttempt.profileId <= 0) {
+      throw ArgumentError(
+        'TableOverallStats updates require a persisted profileId.',
+      );
+    }
 
-    // Intentar obtener las estadísticas existentes para esta tabla
-    TableOverallStats? existingStats = _tableOverallStats
-        .query(TableOverallStats_.tableNumber.equals(tableNum))
+    _store.runInTransaction(TxMode.write, () {
+      _upsertTableOverallStats(newAttempt);
+    });
+  }
+
+  void _upsertTableOverallStats(QuizAttemp newAttempt) {
+    final tableNum = newAttempt.tableNumber;
+    final existingStats = _tableOverallStats
+        .query(
+          TableOverallStats_.tableNumber
+              .equals(tableNum)
+              .and(TableOverallStats_.profileId.equals(newAttempt.profileId)),
+        )
         .build()
         .findFirst();
 
-    if (existingStats == null) {
-      // Si no existen, crear nuevas estadísticas
-      existingStats = TableOverallStats(
-        tableNumber: tableNum,
-        totalAttempts: 1,
-        totalCorrectAnswersSum: newAttempt.correctAnswers,
-        totalQuestionsSum: newAttempt.totalQuestions,
-        bestTimeInSeconds: newAttempt.durationInSeconds,
-        bestScoreCorrect: newAttempt.correctAnswers,
-        bestScoreTotal: newAttempt.totalQuestions,
-      );
-    } else {
-      // Si existen, actualizarlas
-      existingStats.totalAttempts += 1;
-      existingStats.totalCorrectAnswersSum += newAttempt.correctAnswers;
-      existingStats.totalQuestionsSum += newAttempt.totalQuestions;
+    final stats =
+        existingStats ??
+        TableOverallStats(
+          tableNumber: tableNum,
+          profileId: newAttempt.profileId,
+          totalAttempts: 0,
+          totalCorrectAnswersSum: 0,
+          totalQuestionsSum: 0,
+        );
 
-      // Actualizar mejor tiempo
-      if (newAttempt.durationInSeconds != null) {
-        if (existingStats.bestTimeInSeconds == null ||
-            newAttempt.durationInSeconds! < existingStats.bestTimeInSeconds!) {
-          existingStats.bestTimeInSeconds = newAttempt.durationInSeconds;
-        }
-      }
+    stats.totalAttempts += 1;
+    stats.totalCorrectAnswersSum += newAttempt.correctAnswers;
+    stats.totalQuestionsSum += newAttempt.totalQuestions;
 
-      // Actualizar mejor puntuación
-      if (newAttempt.totalQuestions > 0) {
-        double newAttemptAccuracy =
-            newAttempt.correctAnswers / newAttempt.totalQuestions;
-        double currentBestAccuracy = (existingStats.bestScoreTotal > 0)
-            ? existingStats.bestScoreCorrect / existingStats.bestScoreTotal
-            : 0.0;
-
-        if (newAttemptAccuracy > currentBestAccuracy) {
-          existingStats.bestScoreCorrect = newAttempt.correctAnswers;
-          existingStats.bestScoreTotal = newAttempt.totalQuestions;
-        } else if (newAttemptAccuracy == currentBestAccuracy &&
-            newAttempt.correctAnswers > existingStats.bestScoreCorrect) {
-          existingStats.bestScoreCorrect = newAttempt.correctAnswers;
-          existingStats.bestScoreTotal = newAttempt.totalQuestions;
-        }
-      } else if (existingStats.bestScoreTotal == 0) {
-        // Si el mejor actual es 0/0 y el nuevo también
-        existingStats.bestScoreCorrect = newAttempt.correctAnswers;
-        existingStats.bestScoreTotal = newAttempt.totalQuestions;
+    if (newAttempt.durationInSeconds != null) {
+      if (stats.bestTimeInSeconds == null ||
+          newAttempt.durationInSeconds! < stats.bestTimeInSeconds!) {
+        stats.bestTimeInSeconds = newAttempt.durationInSeconds;
       }
     }
 
-    _tableOverallStats.put(
-      existingStats,
-    ); // Guardar (o actualizar) las estadísticas agregadas
+    if (newAttempt.totalQuestions > 0) {
+      final newAttemptAccuracy =
+          newAttempt.correctAnswers / newAttempt.totalQuestions;
+      final currentBestAccuracy = stats.bestScoreTotal > 0
+          ? stats.bestScoreCorrect / stats.bestScoreTotal
+          : 0.0;
+
+      if (newAttemptAccuracy > currentBestAccuracy ||
+          (newAttemptAccuracy == currentBestAccuracy &&
+              newAttempt.correctAnswers > stats.bestScoreCorrect)) {
+        stats.bestScoreCorrect = newAttempt.correctAnswers;
+        stats.bestScoreTotal = newAttempt.totalQuestions;
+      }
+    } else if (stats.bestScoreTotal == 0) {
+      stats.bestScoreCorrect = newAttempt.correctAnswers;
+      stats.bestScoreTotal = newAttempt.totalQuestions;
+    }
+
+    _tableOverallStats.put(stats);
   }
+
+  Future<_SelectionContext> _resolveSelectionContext() async {
+    final modeName = prefs.getString(AppPrefs.activeProfileMode);
+    final selectionMode = ProfileSelectionMode.values.cast<ProfileSelectionMode?>()
+        .firstWhere(
+          (candidate) => candidate?.name == modeName,
+          orElse: () => null,
+        );
+
+    return _SelectionContext(
+      mode: selectionMode ?? ProfileSelectionMode.none,
+      profileId: prefs.getInt(AppPrefs.activeProfileId),
+    );
+  }
+
+  String? _profileNameForId(int profileId) {
+    final profile = objectboxService.profileBox.get(profileId);
+    return profile?.name;
+  }
+
+  List<TableOverallStats> _buildDisplayStats({
+    required List<TableOverallStats> scopedStats,
+    required int? profileId,
+  }) {
+    return _tablesToDisplay.map((tableNum) {
+      return scopedStats.cast<TableOverallStats?>().firstWhere(
+            (candidate) => candidate?.tableNumber == tableNum,
+            orElse: () => TableOverallStats(
+              tableNumber: tableNum,
+              profileId: profileId ?? -1,
+            ),
+          ) ??
+          TableOverallStats(
+            tableNumber: tableNum,
+            profileId: profileId ?? -1,
+          );
+    }).toList(growable: false);
+  }
+}
+
+class _SelectionContext {
+  final ProfileSelectionMode mode;
+  final int? profileId;
+
+  const _SelectionContext({required this.mode, required this.profileId});
 }
