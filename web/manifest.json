@@ -1,12 +1,13 @@
 {
-    "name": "multy_app",
-    "short_name": "multy_app",
+    "name": "Multy — Multiplication Tables",
+    "short_name": "Multy",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#fbf9f5",
+    "theme_color": "#38b000",
+    "description": "Turn multiplication into an exciting adventure. Master times tables 1 to 12 with study cards, quick quizzes, and joyful practice.",
+    "lang": "en",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {
